@@ -1,213 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomadik Security Sentinel — Automated Infrastructure Protection</title>
-    <style>
-        :root {
-            --bg-color: #0a0f1d;
-            --card-bg: #131a30;
-            --accent-color: #00ff66;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border-color: #1f293d;
-        }
-
-        body {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 60px;
-            max-width: 800px;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            color: var(--text-main);
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-        }
-
-        .header h1 span {
-            color: var(--accent-color);
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .pricing-container {
-            display: flex;
-            gap: 30px;
-            max-width: 1200px;
-            width: 100%;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .pricing-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 40px;
-            width: 320px;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .pricing-card.featured {
-            border-color: var(--accent-color);
-            transform: scale(1.05);
-        }
-
-        .badge {
-            position: absolute;
-            top: -15px;
-            right: 20px;
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            padding: 4px 12px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-
-        .tier-name {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .price {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 25px;
-            color: var(--text-main);
-        }
-
-        .price span {
-            font-size: 1rem;
-            color: var(--text-muted);
-        }
-
-        .features-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 35px 0;
-            flex-grow: 1;
-        }
-
-        .features-list li {
-            margin-bottom: 12px;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .features-list li::before {
-            content: "[✓]";
-            color: var(--accent-color);
-            margin-right: 10px;
-            font-weight: bold;
-        }
-
-        .cta-button {
-            display: block;
-            text-align: center;
-            background-color: transparent;
-            color: var(--text-main);
-            border: 2px solid var(--border-color);
-            padding: 14px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .pricing-card.featured .cta-button {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            border-color: var(--accent-color);
-        }
-
-        .cta-button:hover {
-            background-color: var(--text-main);
-            color: var(--bg-color);
-            border-color: var(--text-main);
-        }
-
-        .pricing-card.featured .cta-button:hover {
-            background-color: #00cc52;
-            border-color: #00cc52;
-            color: var(--bg-color);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nomadik Security Sentinel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-slate-950 text-white min-h-screen py-16 px-4 sm:px-6 lg:px-8">
 
-    <div class="header">
-        <h1>NOMADIK SECURITY <span>SENTINEL</span></h1>
-        <p>Automated, active-defense watchdog monitoring for containerized infrastructure and local environments. Deploy legal armor and immediate threat isolation in under 60 seconds.</p>
+  <div class="max-w-7xl mx-auto">
+    
+    <!-- Hero Title Header -->
+    <div class="text-center my-10">
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight">
+        NOMADIK SECURITY <span class="text-emerald-400">SENTINEL</span>
+      </h1>
+      <p class="mt-4 text-slate-400 max-w-2xl mx-auto font-mono text-sm sm:text-base">
+        Automated, active-defense watchdog monitoring for containerized infrastructure and local environments. Deploy legal armor and immediate threat isolation in under 60 seconds.
+      </p>
     </div>
 
-    <div class="pricing-container">
-        <div class="pricing-card">
-            <div class="tier-name">Scout</div>
-            <div class="price">$49<span>/mo</span></div>
-            <ul class="features-list">
-                <li>Passive External Footprinting</li>
-                <li>File Integrity Watchdog</li>
-                <li>Local WSL2/Docker Tracking</li>
-                <li>Basic Terminal Telemetry</li>
-            </ul>
-            <a href="#" class="cta-button">Deploy Scout</a>
+    <!-- 🚨 High-Priority Emergency Hero Banner -->
+    <div class="mb-12 border-2 border-red-600 bg-red-950/40 rounded-2xl p-6 sm:p-8 shadow-2xl shadow-red-900/20 backdrop-blur-md relative overflow-hidden">
+      <div class="absolute top-0 right-0 bg-red-600 text-white font-bold text-xs uppercase tracking-widest px-4 py-1 rounded-bl-lg">
+        Immediate Dispatch
+      </div>
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div class="space-y-2">
+          <span class="inline-block bg-red-500/20 text-red-400 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
+            Active Breach / Incident Response
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
+            4-Hour Rapid Emergency Response & Remediation
+          </h2>
+          <p class="text-slate-300 max-w-2xl text-sm sm:text-base">
+            Facing an active breach, ransomware threat, or urgent compliance audit failure? Our rapid response team deploys behavioral threat detection, perimeter isolation, and remediation within 4 hours.
+          </p>
         </div>
-
-        <div class="pricing-card featured">
-            <div class="badge">Recommended</div>
-            <div class="tier-name">Sentinel</div>
-            <div class="price">$149<span>/mo</span></div>
-            <ul class="features-list">
-                <li>All Scout Tier Capabilities</li>
-                <li>Automated Threat Isolation</li>
-                <li>Container Quarantine Engine</li>
-                <li>Real-Time Alert Webhooks</li>
-            </ul>
-            <a href="#" class="cta-button">Deploy Sentinel</a>
+        <div class="w-full md:w-auto flex flex-col sm:flex-row md:flex-col items-stretch md:items-end gap-3 min-w-[220px]">
+          <div class="text-left md:text-right">
+            <span class="text-3xl font-bold text-white">$1,499</span>
+            <span class="text-slate-400 text-sm"> / emergency event</span>
+          </div>
+          <button
+            onclick="window.location.href='/api/checkout?priceId=price_1TwgHMD5LVILsj0FdCUQpuWt'"
+            className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3 px-6 rounded-xl transition duration-200 shadow-lg shadow-red-600/30 text-center"
+            style="background-color: #dc2626; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: bold;"
+          >
+            Dispatch Response Team
+          </button>
         </div>
-
-        <div class="pricing-card">
-            <div class="tier-name">Sovereign</div>
-            <div class="price">$499<span>/mo</span></div>
-            <ul class="features-list">
-                <li>All Sentinel Tier Capabilities</li>
-                <li>Multi-Node Infrastructure Tracking</li>
-                <li>Direct Wazuh Log Aggregation</li>
-                <li>Custom Behavioral Baselines</li>
-            </ul>
-            <a href="#" class="cta-button">Deploy Sovereign</a>
-        </div>
+      </div>
     </div>
+
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+        Continuous Security Sentinel Plans
+      </h2>
+      <p class="mt-3 text-slate-400 max-w-xl mx-auto">
+        Proactive threat detection, vulnerability management, and continuous perimeter monitoring.
+      </p>
+    </div>
+
+    <!-- Standard Monthly Tiers Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Basic Tier -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition">
+        <div>
+          <h3 class="text-lg font-bold text-slate-200">Basic Sentinel</h3>
+          <p class="text-slate-400 text-sm mt-1">Essential monitoring for small infrastructure.</p>
+          <div class="my-6">
+            <span class="text-4xl font-extrabold text-white">$49</span>
+            <span class="text-slate-400 text-sm">/month</span>
+          </div>
+          <ul class="space-y-3 text-sm text-slate-300 mb-6">
+            <li class="flex items-center">✓ Automated Perimeter Scanning</li>
+            <li className="flex items-center">✓ Weekly Vulnerability Reports</li>
+            <li className="flex items-center">✓ Basic Asset Discovery</li>
+          </ul>
+        </div>
+        <button
+          onclick="window.location.href='/api/checkout?priceId=price_basic_monthly'"
+          class="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-2.5 px-4 rounded-xl transition"
+        >
+          Get Started
+        </button>
+      </div>
+
+      <!-- Standard Tier -->
+      <div class="bg-slate-900 border-2 border-blue-500/50 rounded-2xl p-6 flex flex-col justify-between relative hover:border-blue-500 transition shadow-xl shadow-blue-500/10">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+          Most Popular
+        </div>
+        <div>
+          <h3 class="text-lg font-bold text-slate-200">Standard Sentinel</h3>
+          <p class="text-slate-400 text-sm mt-1">Full endpoint & network security coverage.</p>
+          <div class="my-6">
+            <span class="text-4xl font-extrabold text-white">$149</span>
+            <span class="text-slate-400 text-sm">/month</span>
+          </div>
+          <ul class="space-y-3 text-sm text-slate-300 mb-6">
+            <li class="flex items-center">✓ Continuous Threat Detection</li>
+            <li class="flex items-center">✓ Behavioral Isolation</li>
+            <li class="flex items-center">✓ Daily Scan Reports & Alerts</li>
+            <li class="flex items-center">✓ SIEM & Wazuh Integration</li>
+          </ul>
+        </div>
+        <button
+          onclick="window.location.href='/api/checkout?priceId=price_standard_monthly'"
+          class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 px-4 rounded-xl transition"
+        >
+          Get Started
+        </button>
+      </div>
+
+      <!-- Premium Tier -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition">
+        <div>
+          <h3 class="text-lg font-bold text-slate-200">Premium Sentinel</h3>
+          <p class="text-slate-400 text-sm mt-1">Enterprise-grade compliance & dedicated support.</p>
+          <div class="my-6">
+            <span class="text-4xl font-extrabold text-white">$299</span>
+            <span class="text-slate-400 text-sm">/month</span>
+          </div>
+          <ul class="space-y-3 text-sm text-slate-300 mb-6">
+            <li class="flex items-center">✓ Everything in Standard</li>
+            <li className="flex items-center">✓ Priority Incident Escalation</li>
+            <li className="flex items-center">✓ Compliance Auditing (HIPAA/SOC2)</li>
+            <li class="flex items-center">✓ Custom Automation Scripts</li>
+          </ul>
+        </div>
+        <button
+          onclick="window.location.href='/api/checkout?priceId=price_premium_monthly'"
+          class="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-2.5 px-4 rounded-xl transition"
+        >
+          Get Started
+        </button>
+      </div>
+
+    </div>
+  </div>
 
 </body>
 </html>
