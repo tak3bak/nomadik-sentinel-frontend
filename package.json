@@ -1,0 +1,13 @@
+{
+  "name": "security-sentinel-frontend",
+  "version": "1.0.0",
+  "description": "Nomadik Security Operations Sentinel Dashboard",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build step required for static frontend'",
+    "lint": "echo 'No linting configured for static HTML/JS'"
+  },
+  "keywords": [],
+  "author": "Nomadik Security Operations",
+  "license": "ISC"
+}
