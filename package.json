@@ -4,8 +4,8 @@
   "description": "Nomadik Security Operations Sentinel Dashboard",
   "main": "index.html",
   "scripts": {
-    "build": "echo 'No build step required for static frontend'",
-    "lint": "echo 'No linting configured for static HTML/JS'"
+    "build": "echo 'Static assets ready for Cloudflare Pages'",
+    "lint": "echo 'No linting required for static assets'"
   },
   "keywords": [],
   "author": "Nomadik Security Operations",
