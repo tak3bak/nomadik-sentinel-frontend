@@ -1,2 +1,15 @@
-.vercel
+
+config.env
+*.crt
+*.env
+.env
 .env*
+# Environment variables & secrets
+*.key
+# Keys & Certificates
+*.pem
+*.pub
+quarantine/
+*.quarantined
+# Quarantined test artifacts
+.vercel
