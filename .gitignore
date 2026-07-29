@@ -13,3 +13,4 @@ quarantine/
 *.quarantined
 # Quarantined test artifacts
 .vercel
+.wrangler/
