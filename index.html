@@ -3,199 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomadik - Autonomous Infrastructure & Security</title>
+    <title>Nomadik - Autonomous Growth Agent</title>
     <style>
         :root {
             --bg-color: #0b0f19;
             --card-bg: #111827;
-            --accent-color: #3b82f6;
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
             --border-color: #1f2937;
+            --accent-blue: #2563eb;
+            --text-main: #f9fafb;
+            --text-sub: #9ca3af;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.6;
-            padding: 2rem 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        header {
+        .header {
             text-align: center;
-            padding: 3rem 1rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: -0.025em;
-        }
-
-        p.subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
             max-width: 600px;
-            margin: 0 auto 2rem;
+            margin-bottom: 40px;
         }
-
-        .cta-button {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: #ffffff;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.375rem;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.2s ease;
+        .header h1 {
+            font-size: 2.25rem;
+            margin-bottom: 12px;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .cta-button:hover {
-            background-color: #2563eb;
+        .header p {
+            color: var(--text-sub);
+            font-size: 1.1rem;
         }
-
-        .pricing-section {
-            margin-top: 4rem;
-        }
-
-        .pricing-section h2 {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-        }
-
         .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            width: 100%;
+            max-width: 480px;
         }
-
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
         }
-
-        .card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+        .card.featured {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
         }
-
+        .card h2 {
+            margin: 0 0 8px 0;
+            font-size: 1.5rem;
+        }
+        .card .sub {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
         .price {
-            font-size: 2rem;
-            font-weight: 700;
-            margin: 1rem 0;
+            font-size: 2.25rem;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
-
         .price span {
             font-size: 1rem;
-            color: var(--text-muted);
-            font-weight: 400;
+            color: var(--text-sub);
+            font-weight: normal;
         }
-
         .features {
             list-style: none;
-            margin-bottom: 2rem;
+            padding: 0;
+            margin: 0 0 24px 0;
         }
-
         .features li {
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
+            margin-bottom: 10px;
+            color: #d1d5db;
             font-size: 0.95rem;
+            display: flex;
+            align-items: center;
         }
-
         .features li::before {
-            content: "✓ ";
-            color: var(--accent-color);
+            content: "✓";
+            color: #60a5fa;
+            margin-right: 10px;
+            font-weight: bold;
         }
-
-        footer {
+        .cta-button {
+            display: block;
+            width: 100%;
             text-align: center;
-            margin-top: 5rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.875rem;
+            background-color: var(--accent-blue);
+            color: #ffffff;
+            padding: 12px 0;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s ease;
+            box-sizing: border-box;
+        }
+        .cta-button:hover {
+            background-color: #1d4ed8;
+        }
+        .cta-button.secondary {
+            background-color: #374151;
+        }
+        .cta-button.secondary:hover {
+            background-color: #4b5563;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Autonomous Security & Sentinel Protection</h1>
-            <p class="subtitle">Real-time threat monitoring, automated response dispatch, and web traffic protection tailored for modern infrastructure.</p>
-            <a href="#pricing" class="cta-button">Get Started</a>
-        </header>
+    <div class="header">
+        <h1>Nomadik Growth Engine</h1>
+        <p>Automated Lead Prospecting, Direct Outreach & Pipeline Conversion</p>
+    </div>
 
-        <section id="pricing" class="pricing-section">
-            <h2>Select a Plan</h2>
-            <div class="grid">
-                <div class="card">
-                    <div>
-                        <h3>Starter</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Essential monitoring for smaller projects.</p>
-                        <div class="price">$29 <span>/ mo</span></div>
-                        <ul class="features">
-                            <li>Real-time traffic analytics</li>
-                            <li>Automated anomaly detection</li>
-                            <li>Community support</li>
-                        </ul>
-                    </div>
-                    <a href="#" class="cta-button" style="text-align:center;">Choose Plan</a>
-                </div>
+    <div class="grid">
+        <!-- Starter Tier -->
+        <div class="card">
+            <h2>Starter Engine</h2>
+            <div class="sub">Automated Prospecting & Outreach</div>
+            <div class="price">$49 <span>/ mo</span></div>
+            <ul class="features">
+                <li>Automated Lead Scraping Engine</li>
+                <li>Daily Pipeline Generation</li>
+                <li>Standard Cold Email Sequences</li>
+                <li>Email Support</li>
+            </ul>
+            <a href="https://buy.stripe.com/28EaEW5jMacrbwU2Uvd7q08" class="cta-button">Choose Starter</a>
+        </div>
 
-                <div class="card" style="border-color: var(--accent-color);">
-                    <div>
-                        <h3>Pro Sentinel</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Complete defense automation for growing sites.</p>
-                        <div class="price">$99 <span>/ mo</span></div>
-                        <ul class="features">
-                            <li>Everything in Starter</li>
-                            <li>Instant threat response dispatch</li>
-                            <li>Custom routing & rules</li>
-                            <li>Priority email support</li>
-                        </ul>
-                    </div>
-                    <a href="#" class="cta-button" style="text-align:center;">Choose Plan</a>
-                </div>
+        <!-- Pro Tier -->
+        <div class="card featured">
+            <h2>Growth Sentinel</h2>
+            <div class="sub">Full Automated Pipeline Deployment</div>
+            <div class="price">$149 <span>/ mo</span></div>
+            <ul class="features">
+                <li>Everything in Starter</li>
+                <li>Automated Phone & Web Scraping</li>
+                <li>Custom Multi-Touch Campaigns</li>
+                <li>Stripe Payment Hook Integration</li>
+                <li>Priority Support</li>
+            </ul>
+            <a href="https://buy.stripe.com/28EaEW5jMacrbwU2Uvd7q08" class="cta-button">Choose Growth</a>
+        </div>
 
-                <div class="card">
-                    <div>
-                        <h3>Enterprise</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Full custom deployment and dedicated infrastructure.</p>
-                        <div class="price">Custom</div>
-                        <ul class="features">
-                            <li>Dedicated Sentinel instances</li>
-                            <li>SLA guarantees</li>
-                            <li>24/7 incident team access</li>
-                        </ul>
-                    </div>
-                    <a href="https://buy.stripe.com/28EaEW5jMacrbwU2Uvd7q08" class="cta-button" style="text-align:center; background-color: #374151;">Contact Us</a>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            &copy; Nomadik. All rights reserved.
-        </footer>
+        <!-- Enterprise Tier -->
+        <div class="card">
+            <h2>Enterprise Custom</h2>
+            <div class="sub">Dedicated Autonomous Infrastructure</div>
+            <div class="price">Custom</div>
+            <ul class="features">
+                <li>Dedicated Agent Execution Host</li>
+                <li>Custom CRM & Webhook Routing</li>
+                <li>24/7 Monitoring & Optimization</li>
+                <li>SLA & Dedicated Engineering</li>
+            </ul>
+            <a href="https://buy.stripe.com/28EaEW5jMacrbwU2Uvd7q08" class="cta-button secondary">Contact Team</a>
+        </div>
     </div>
 
 </body>
