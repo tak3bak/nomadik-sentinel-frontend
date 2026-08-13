@@ -2,12 +2,20 @@ const express = require('express');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { Resend } = require('resend');
 
+// Startup validation to prevent silent failures in production
+if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_WEBHOOK_SECRET || !process.env.RESEND_API_KEY) {
+    console.error('[CRITICAL] Missing required environment variables. Check Render configuration.');
+    process.exit(1);
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Serve static assets from root directory
-app.use(express.static(__dirname));
+// Render Health Check Endpoint
+app.get('/', (req, res) => {
+    res.status(200).send('Nomadik Sentinel Dispatcher is active and running.');
+});
 
 // Stripe Webhook Endpoint (requires raw body parser for signature verification)
 app.post('/api/stripe-webhook', express.raw({ type: 'application/json' }), async (req, res) => {
