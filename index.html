@@ -90,7 +90,7 @@
                         <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Email Incident Notifications</li>
                     </ul>
                 </div>
-                <button type="button" class="plan-btn w-full text-center bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer" data-plan="Starter">Select Starter</button>
+                <button type="button" class="plan-btn w-full text-center bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer" data-plan="Starter Sentinel" data-stripe="https://buy.stripe.com/eVq28qeUm98ngRebr1d7q0a">Select Starter</button>
             </div>
 
             <!-- Pro Tier (Recommended) -->
@@ -106,7 +106,7 @@
                         <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> 4-Hour Rapid Dispatch SLA</li>
                     </ul>
                 </div>
-                <button type="button" class="plan-btn w-full text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition block cursor-pointer" data-plan="Pro Operations">Deploy Pro</button>
+                <button type="button" class="plan-btn w-full text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition block cursor-pointer" data-plan="Pro Operations" data-stripe="https://buy.stripe.com/eVq28qeUm98ngRebr1d7q0a">Deploy Pro</button>
             </div>
 
             <!-- Enterprise Tier -->
@@ -121,28 +121,37 @@
                         <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Custom SIEM / SOC Integration</li>
                     </ul>
                 </div>
-                <button type="button" class="plan-btn w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer" data-plan="Enterprise">Contact Operations</button>
+                <button type="button" class="plan-btn w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer" data-plan="Enterprise Defense" data-stripe="">Contact Operations</button>
             </div>
         </div>
     </section>
 
-    <!-- Modal for Onboarding/Contact -->
+    <!-- Lead Capture & Checkout Modal -->
     <div id="contactModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur hidden items-center justify-center p-4 z-50">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 max-w-md w-full relative">
             <button type="button" id="closeModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl font-bold cursor-pointer">&times;</button>
             <h3 class="text-xl font-bold text-white mb-2" id="modalTitle">Deploy Security Sentinel</h3>
-            <p class="text-sm text-slate-400 mb-6">Submit your work email to initiate setup or request custom architecture details.</p>
+            <p class="text-sm text-slate-400 mb-6">Enter your details to register your organization and proceed directly to payment.</p>
             <form id="onboardingForm" class="space-y-4">
                 <input type="hidden" id="selectedPlan" value="Default">
+                <input type="hidden" id="stripeUrl" value="">
+                
                 <div>
-                    <label class="block text-xs font-mono text-slate-400 mb-1">WORK EMAIL</label>
-                    <input type="email" required placeholder="name@company.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+                    <label class="block text-xs font-mono text-slate-400 mb-1">FULL NAME <span class="text-emerald-400">*</span></label>
+                    <input type="text" id="fullName" required placeholder="Kalen Vandenbos" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
                 </div>
+
+                <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1">WORK EMAIL <span class="text-emerald-400">*</span></label>
+                    <input type="email" id="workEmail" required placeholder="kalen@nomadiksecurity.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+                </div>
+
                 <div>
                     <label class="block text-xs font-mono text-slate-400 mb-1">INFRASTRUCTURE SCOPE</label>
-                    <textarea rows="3" placeholder="Number of servers, cloud providers, or compliance needs..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500"></textarea>
+                    <textarea id="infraScope" rows="2" placeholder="Number of servers, cloud providers, or compliance needs..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500"></textarea>
                 </div>
-                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition cursor-pointer">Submit Onboarding Request</button>
+
+                <button type="submit" id="submitBtn" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition cursor-pointer">Continue to Payment →</button>
             </form>
         </div>
     </div>
@@ -150,7 +159,7 @@
     <!-- Footer -->
     <footer id="contact" class="border-t border-slate-800 py-10 bg-slate-900/60">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
-            <div>© 2026 Nomadik Security Operations LLC. All rights reserved.</div>
+            <div>© 2026 Nomadik Security Operations LLC. Denver, CO. All rights reserved.</div>
             <div class="flex space-x-6">
                 <a href="#pricing" class="hover:text-slate-400">Pricing</a>
                 <a href="#features" class="hover:text-slate-400">Architecture</a>
@@ -163,12 +172,22 @@
             const modal = document.getElementById('contactModal');
             const modalTitle = document.getElementById('modalTitle');
             const selectedPlanInput = document.getElementById('selectedPlan');
+            const stripeUrlInput = document.getElementById('stripeUrl');
             const closeModalBtn = document.getElementById('closeModalBtn');
             const onboardingForm = document.getElementById('onboardingForm');
+            const submitBtn = document.getElementById('submitBtn');
 
-            function openModal(planName) {
-                modalTitle.innerText = 'Request ' + planName + ' Sentinel Plan';
+            function openModal(planName, stripeUrl) {
+                modalTitle.innerText = 'Register for ' + planName;
                 selectedPlanInput.value = planName;
+                stripeUrlInput.value = stripeUrl || '';
+                
+                if (stripeUrl) {
+                    submitBtn.innerText = 'Continue to Payment →';
+                } else {
+                    submitBtn.innerText = 'Submit Enterprise Request';
+                }
+
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
             }
@@ -181,7 +200,8 @@
             document.querySelectorAll('.plan-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const plan = e.target.getAttribute('data-plan');
-                    openModal(plan);
+                    const stripeUrl = e.target.getAttribute('data-stripe');
+                    openModal(plan, stripeUrl);
                 });
             });
 
@@ -196,9 +216,18 @@
             onboardingForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const plan = selectedPlanInput.value;
-                alert('Thank you! Onboarding request for [' + plan + '] received. Nomadik Security Operations will contact you shortly.');
-                closeModal();
-                onboardingForm.reset();
+                const targetStripe = stripeUrlInput.value;
+                const email = document.getElementById('workEmail').value;
+                const name = document.getElementById('fullName').value;
+
+                if (targetStripe) {
+                    const finalCheckoutUrl = targetStripe + '?prefilled_email=' + encodeURIComponent(email);
+                    window.location.href = finalCheckoutUrl;
+                } else {
+                    alert('Thank you, ' + name + '! Enterprise inquiry received for ' + plan + '. Nomadik Security Operations will contact you at ' + email + ' shortly.');
+                    closeModal();
+                    onboardingForm.reset();
+                }
             });
         });
     </script>
