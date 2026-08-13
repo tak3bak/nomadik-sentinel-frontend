@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "build": "echo 'Static assets ready for Cloudflare Pages'",
-    "lint": "echo 'No linting required for static assets'"
+    "lint": "echo 'No linting required for static assets'",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Nomadik Security Operations",
