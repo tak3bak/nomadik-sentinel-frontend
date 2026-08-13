@@ -9,5 +9,11 @@
   },
   "keywords": [],
   "author": "Nomadik Security Operations",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@esbuild/android-arm64": "^0.28.1",
+    "express": "^5.2.1",
+    "resend": "^6.19.0",
+    "stripe": "^22.5.0"
+  }
 }
