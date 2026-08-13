@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
     </style>
@@ -23,9 +24,9 @@
             <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-400">
                 <a href="#features" class="hover:text-white transition">Features</a>
                 <a href="#pricing" class="hover:text-white transition">Pricing</a>
-                <a href="#status" class="hover:text-white transition">System Status</a>
+                <a href="#contact" class="hover:text-white transition">Contact</a>
             </nav>
-            <a href="#pricing" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition">Get Started</a>
+            <a href="#pricing" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition cursor-pointer">Get Started</a>
         </div>
     </header>
 
@@ -41,8 +42,8 @@
             Stop security breaches before they escalate. Nomadik Security Sentinel continuously monitors, isolates, and quarantines threat vectors across your infrastructure in real time.
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#pricing" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 transition">Deploy Sentinel</a>
-            <a href="#features" class="border border-slate-700 hover:border-slate-500 bg-slate-900 text-slate-300 font-semibold px-8 py-4 rounded-xl transition">Explore Features</a>
+            <a href="#pricing" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 transition cursor-pointer">Deploy Sentinel</a>
+            <a href="#features" class="border border-slate-700 hover:border-slate-500 bg-slate-900 text-slate-300 font-semibold px-8 py-4 rounded-xl transition cursor-pointer">Explore Features</a>
         </div>
     </section>
 
@@ -77,6 +78,7 @@
             <p class="text-slate-400">Select the coverage model that matches your operational footprint.</p>
         </div>
         <div class="grid md:grid-cols-3 gap-8">
+            <!-- Starter Tier -->
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 flex flex-col justify-between">
                 <div>
                     <h3 class="text-xl font-bold text-white mb-2">Starter Sentinel</h3>
@@ -88,8 +90,10 @@
                         <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Email Incident Notifications</li>
                     </ul>
                 </div>
-                <button class="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition">Select Starter</button>
+                <a href="https://buy.stripe.com/test_starter" target="_blank" class="w-full text-center bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer">Select Starter</a>
             </div>
+
+            <!-- Pro Tier (Recommended) -->
             <div class="bg-slate-900 border-2 border-emerald-500 rounded-2xl p-8 flex flex-col justify-between relative shadow-2xl shadow-emerald-500/10">
                 <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-500 text-slate-950 font-bold text-xs uppercase px-3 py-1 rounded-full tracking-wider">Recommended</div>
                 <div>
@@ -102,8 +106,10 @@
                         <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> 4-Hour Rapid Dispatch SLA</li>
                     </ul>
                 </div>
-                <button class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition">Deploy Pro</button>
+                <a href="https://buy.stripe.com/test_pro" target="_blank" class="w-full text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition block cursor-pointer">Deploy Pro</a>
             </div>
+
+            <!-- Enterprise Tier -->
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 flex flex-col justify-between">
                 <div>
                     <h3 class="text-xl font-bold text-white mb-2">Enterprise Defense</h3>
@@ -115,13 +121,27 @@
                         <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Custom SIEM / SOC Integration</li>
                     </ul>
                 </div>
-                <button class="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition">Contact Operations</button>
+                <button onclick="openModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer">Contact Operations</button>
             </div>
         </div>
     </section>
 
+    <!-- Modal for Contact/Enterprise -->
+    <div id="contactModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur hidden items-center justify-center p-4 z-50">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 max-w-md w-full relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">&times;</button>
+            <h3 class="text-xl font-bold text-white mb-2">Contact Security Operations</h3>
+            <p class="text-sm text-slate-400 mb-6">Specify your deployment size to schedule an architecture review.</p>
+            <form onsubmit="handleContact(event)" class="space-y-4">
+                <input type="email" required placeholder="work@company.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+                <textarea rows="3" required placeholder="Describe your infrastructure scope..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500"></textarea>
+                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
-    <footer class="border-t border-slate-800 py-10 bg-slate-900/60">
+    <footer id="contact" class="border-t border-slate-800 py-10 bg-slate-900/60">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
             <div>© 2026 Nomadik Security Operations LLC. All rights reserved.</div>
             <div class="flex space-x-6">
@@ -131,5 +151,20 @@
         </div>
     </footer>
 
+    <script>
+        function openModal() {
+            document.getElementById('contactModal').classList.remove('hidden');
+            document.getElementById('contactModal').classList.add('flex');
+        }
+        function closeModal() {
+            document.getElementById('contactModal').classList.add('hidden');
+            document.getElementById('contactModal').classList.remove('flex');
+        }
+        function handleContact(e) {
+            e.preventDefault();
+            alert('Request received. Nomadik Security Operations will contact you shortly.');
+            closeModal();
+        }
+    </script>
 </body>
 </html>
