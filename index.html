@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomadik Security Sentinel | Automated Defense & Monitoring</title>
+    <title>Nomadik Security Sentinel | Autonomous Defense & Threat Quarantine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -90,7 +90,7 @@
                         <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Email Incident Notifications</li>
                     </ul>
                 </div>
-                <button onclick="openModal('Starter')" class="w-full text-center bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer">Select Starter</button>
+                <button type="button" class="plan-btn w-full text-center bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer" data-plan="Starter">Select Starter</button>
             </div>
 
             <!-- Pro Tier (Recommended) -->
@@ -106,7 +106,7 @@
                         <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> 4-Hour Rapid Dispatch SLA</li>
                     </ul>
                 </div>
-                <button onclick="openModal('Pro')" class="w-full text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition block cursor-pointer">Deploy Pro</button>
+                <button type="button" class="plan-btn w-full text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition block cursor-pointer" data-plan="Pro Operations">Deploy Pro</button>
             </div>
 
             <!-- Enterprise Tier -->
@@ -121,18 +121,18 @@
                         <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Custom SIEM / SOC Integration</li>
                     </ul>
                 </div>
-                <button onclick="openModal('Enterprise')" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer">Contact Operations</button>
+                <button type="button" class="plan-btn w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer" data-plan="Enterprise">Contact Operations</button>
             </div>
         </div>
     </section>
 
-    <!-- Modal for Contact/Onboarding -->
+    <!-- Modal for Onboarding/Contact -->
     <div id="contactModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur hidden items-center justify-center p-4 z-50">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 max-w-md w-full relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl font-bold">&times;</button>
+            <button type="button" id="closeModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl font-bold cursor-pointer">&times;</button>
             <h3 class="text-xl font-bold text-white mb-2" id="modalTitle">Deploy Security Sentinel</h3>
-            <p class="text-sm text-slate-400 mb-6">Submit your work email to begin setup or request custom architecture details.</p>
-            <form onsubmit="handleContact(event)" class="space-y-4">
+            <p class="text-sm text-slate-400 mb-6">Submit your work email to initiate setup or request custom architecture details.</p>
+            <form id="onboardingForm" class="space-y-4">
                 <input type="hidden" id="selectedPlan" value="Default">
                 <div>
                     <label class="block text-xs font-mono text-slate-400 mb-1">WORK EMAIL</label>
@@ -159,22 +159,48 @@
     </footer>
 
     <script>
-        function openModal(planName) {
-            document.getElementById('modalTitle').innerText = 'Request ' + planName + ' Sentinel Plan';
-            document.getElementById('selectedPlan').value = planName;
-            document.getElementById('contactModal').classList.remove('hidden');
-            document.getElementById('contactModal').classList.add('flex');
-        }
-        function closeModal() {
-            document.getElementById('contactModal').classList.add('hidden');
-            document.getElementById('contactModal').classList.remove('flex');
-        }
-        function handleContact(e) {
-            e.preventDefault();
-            const plan = document.getElementById('selectedPlan').value;
-            alert('Thank you! Onboarding request for [' + plan + ' Plan] received. Nomadik Security Operations will reach out shortly.');
-            closeModal();
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('contactModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const selectedPlanInput = document.getElementById('selectedPlan');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const onboardingForm = document.getElementById('onboardingForm');
+
+            function openModal(planName) {
+                modalTitle.innerText = 'Request ' + planName + ' Sentinel Plan';
+                selectedPlanInput.value = planName;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+
+            function closeModal() {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+
+            document.querySelectorAll('.plan-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const plan = e.target.getAttribute('data-plan');
+                    openModal(plan);
+                });
+            });
+
+            closeModalBtn.addEventListener('click', closeModal);
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            onboardingForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const plan = selectedPlanInput.value;
+                alert('Thank you! Onboarding request for [' + plan + '] received. Nomadik Security Operations will contact you shortly.');
+                closeModal();
+                onboardingForm.reset();
+            });
+        });
     </script>
 </body>
 </html>
