@@ -26,7 +26,7 @@
                 <a href="#pricing" class="hover:text-white transition">Pricing</a>
                 <a href="#contact" class="hover:text-white transition">Contact</a>
             </nav>
-            <a href="#pricing" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition cursor-pointer">Get Started</a>
+            <a href="#pricing" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition cursor-pointer inline-block">Get Started</a>
         </div>
     </header>
 
@@ -42,8 +42,8 @@
             Stop security breaches before they escalate. Nomadik Security Sentinel continuously monitors, isolates, and quarantines threat vectors across your infrastructure in real time.
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#pricing" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 transition cursor-pointer">Deploy Sentinel</a>
-            <a href="#features" class="border border-slate-700 hover:border-slate-500 bg-slate-900 text-slate-300 font-semibold px-8 py-4 rounded-xl transition cursor-pointer">Explore Features</a>
+            <a href="#pricing" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-8 py-4 rounded-xl shadow-lg shadow-emerald-500/20 transition cursor-pointer inline-block">Deploy Sentinel</a>
+            <a href="#features" class="border border-slate-700 hover:border-slate-500 bg-slate-900 text-slate-300 font-semibold px-8 py-4 rounded-xl transition cursor-pointer inline-block">Explore Features</a>
         </div>
     </section>
 
@@ -90,7 +90,7 @@
                         <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Email Incident Notifications</li>
                     </ul>
                 </div>
-                <a href="https://buy.stripe.com/test_starter" target="_blank" class="w-full text-center bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer">Select Starter</a>
+                <button onclick="openModal('Starter')" class="w-full text-center bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer">Select Starter</button>
             </div>
 
             <!-- Pro Tier (Recommended) -->
@@ -106,7 +106,7 @@
                         <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> 4-Hour Rapid Dispatch SLA</li>
                     </ul>
                 </div>
-                <a href="https://buy.stripe.com/test_pro" target="_blank" class="w-full text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition block cursor-pointer">Deploy Pro</a>
+                <button onclick="openModal('Pro')" class="w-full text-center bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition block cursor-pointer">Deploy Pro</button>
             </div>
 
             <!-- Enterprise Tier -->
@@ -121,21 +121,28 @@
                         <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Custom SIEM / SOC Integration</li>
                     </ul>
                 </div>
-                <button onclick="openModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer">Contact Operations</button>
+                <button onclick="openModal('Enterprise')" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-xl transition block cursor-pointer">Contact Operations</button>
             </div>
         </div>
     </section>
 
-    <!-- Modal for Contact/Enterprise -->
+    <!-- Modal for Contact/Onboarding -->
     <div id="contactModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur hidden items-center justify-center p-4 z-50">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 max-w-md w-full relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">&times;</button>
-            <h3 class="text-xl font-bold text-white mb-2">Contact Security Operations</h3>
-            <p class="text-sm text-slate-400 mb-6">Specify your deployment size to schedule an architecture review.</p>
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl font-bold">&times;</button>
+            <h3 class="text-xl font-bold text-white mb-2" id="modalTitle">Deploy Security Sentinel</h3>
+            <p class="text-sm text-slate-400 mb-6">Submit your work email to begin setup or request custom architecture details.</p>
             <form onsubmit="handleContact(event)" class="space-y-4">
-                <input type="email" required placeholder="work@company.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
-                <textarea rows="3" required placeholder="Describe your infrastructure scope..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500"></textarea>
-                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition">Submit Request</button>
+                <input type="hidden" id="selectedPlan" value="Default">
+                <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1">WORK EMAIL</label>
+                    <input type="email" required placeholder="name@company.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-slate-400 mb-1">INFRASTRUCTURE SCOPE</label>
+                    <textarea rows="3" placeholder="Number of servers, cloud providers, or compliance needs..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition cursor-pointer">Submit Onboarding Request</button>
             </form>
         </div>
     </div>
@@ -145,14 +152,16 @@
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
             <div>© 2026 Nomadik Security Operations LLC. All rights reserved.</div>
             <div class="flex space-x-6">
-                <a href="#" class="hover:text-slate-400">Privacy Policy</a>
-                <a href="#" class="hover:text-slate-400">Terms of Service</a>
+                <a href="#pricing" class="hover:text-slate-400">Pricing</a>
+                <a href="#features" class="hover:text-slate-400">Architecture</a>
             </div>
         </div>
     </footer>
 
     <script>
-        function openModal() {
+        function openModal(planName) {
+            document.getElementById('modalTitle').innerText = 'Request ' + planName + ' Sentinel Plan';
+            document.getElementById('selectedPlan').value = planName;
             document.getElementById('contactModal').classList.remove('hidden');
             document.getElementById('contactModal').classList.add('flex');
         }
@@ -162,7 +171,8 @@
         }
         function handleContact(e) {
             e.preventDefault();
-            alert('Request received. Nomadik Security Operations will contact you shortly.');
+            const plan = document.getElementById('selectedPlan').value;
+            alert('Thank you! Onboarding request for [' + plan + ' Plan] received. Nomadik Security Operations will reach out shortly.');
             closeModal();
         }
     </script>
