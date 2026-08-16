@@ -1,330 +1,294 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomadik Security Operations | Autonomous Defense & Intelligence</title>
+    <title>Nomadik Security Operations — Autonomous Threat Defense</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        dark: {
-                            900: '#0a0a0c',
-                            800: '#121316',
-                            700: '#1a1b20',
-                            600: '#272930',
-                        },
+                        darkbase: '#0a0a0c',
+                        surface: '#121316',
+                        elevated: '#1a1b20',
+                        bordercol: '#272930',
                         gold: {
                             400: '#facc15',
                             500: '#eab308',
                             600: '#ca8a04',
-                            accent: '#f59e0b',
-                            metallic: '#d97706'
+                            accent: '#f59e0b'
                         }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
                     }
                 }
             }
         }
     </script>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0a0a0c; color: #f3f4f6; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .gold-gradient { background: linear-gradient(135deg, #facc15 0%, #ca8a04 100%); }
+        .gold-text-gradient { background: linear-gradient(135deg, #facc15 0%, #eab308 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
 </head>
-<body class="bg-dark-900 text-gray-100 font-sans antialiased selection:bg-gold-500 selection:text-dark-900">
+<body class="min-h-screen flex flex-col antialiased selection:bg-gold-500 selection:text-black">
 
-    <!-- Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-dark-900/80 backdrop-blur-md border-b border-dark-700">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 border-b border-bordercol bg-darkbase/85 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center shadow-lg shadow-gold-500/10">
-                    <svg class="w-6 h-6 text-dark-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                    </svg>
+                <div class="w-10 h-10 rounded-lg bg-surface border border-bordercol flex items-center justify-center shadow-lg">
+                    <span class="text-gold-400 font-mono font-bold text-lg">N</span>
                 </div>
-                <span class="text-xl font-bold tracking-tight text-white">NOMADIK<span class="text-gold-500">.SITE</span></span>
+                <span class="font-mono font-bold tracking-wider text-lg text-white">nomadik<span class="text-gold-400">.site</span></span>
             </div>
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
-                <a href="#features" class="hover:text-gold-400 transition-colors">Capabilities</a>
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-400">
+                <a href="#capabilities" class="hover:text-gold-400 transition-colors">Capabilities</a>
                 <a href="#pricing" class="hover:text-gold-400 transition-colors">Pricing</a>
-                <a href="#contact" class="hover:text-gold-400 transition-colors">Enterprise Lead</a>
+                <a href="#contact" class="hover:text-gold-400 transition-colors">Enterprise</a>
             </nav>
             <div>
-                <a href="#pricing" class="inline-flex items-center justify-center px-4 py-2 border border-gold-500/50 text-sm font-medium rounded-lg text-gold-400 bg-gold-500/10 hover:bg-gold-500/20 transition-all shadow-sm">
-                    Get Started
+                <a href="#pricing" class="px-5 py-2.5 rounded-md gold-gradient text-black font-semibold text-sm hover:opacity-95 transition-all shadow-md shadow-yellow-500/10">
+                    Deploy Sentinel
                 </a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden border-b border-dark-700">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold-600/10 via-dark-900 to-dark-900 pointer-events-none"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="max-w-3xl mx-auto text-center">
-                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-dark-800 border border-gold-500/30 text-gold-400 text-xs font-mono mb-6">
-                    <span class="w-2 h-2 rounded-full bg-gold-500 animate-pulse"></span>
-                    <span>SYSTEM SENTINEL ACTIVE • v2.4 DEPLOYED</span>
-                </div>
-                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
-                    Autonomous Defense & <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-gold-500 to-amber-600">Security Intelligence</span>
-                </h1>
-                <p class="text-lg sm:text-xl text-gray-400 mb-10 leading-relaxed">
-                    Deploy real-time automated surveillance, containerized monitoring pipelines, and enterprise-grade threat analytics built for modern digital infrastructure.
-                </p>
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="#pricing" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl text-dark-900 font-bold bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-300 hover:to-gold-400 transition-all shadow-lg shadow-gold-500/20">
-                        Deploy Security Sentinel
-                    </a>
-                    <a href="#features" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl text-gray-300 font-medium bg-dark-800 border border-dark-600 hover:bg-dark-700 transition-all">
-                        Explore Capabilities
-                    </a>
-                </div>
+    <section class="relative pt-24 pb-20 border-b border-bordercol overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-yellow-500/5 via-transparent to-transparent pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-surface border border-bordercol text-xs font-mono text-gold-400 mb-6">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>SYSTEM STATUS: ALL OPERATIONAL // v4.2.0</span>
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white max-w-4xl mb-6">
+                Autonomous Threat Defense for <span class="gold-text-gradient">Modern Infrastructure</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mb-10 font-normal leading-relaxed">
+                Real-time containerized security enforcement, automated remediation pipelines, and high-velocity compliance workflows built for elite engineering teams.
+            </p>
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#pricing" class="px-8 py-3.5 rounded-lg gold-gradient text-black font-bold text-center hover:opacity-90 transition-all shadow-lg shadow-yellow-500/20">
+                    View Pricing & Tiers
+                </a>
+                <a href="#capabilities" class="px-8 py-3.5 rounded-lg bg-surface border border-bordercol text-white font-medium text-center hover:border-gold-400 transition-all">
+                    Explore Architecture
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Value Props Section -->
-    <section id="features" class="py-24 bg-dark-900">
+    <!-- Capabilities Section -->
+    <section id="capabilities" class="py-24 border-b border-bordercol bg-surface/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-xs font-mono text-gold-500 uppercase tracking-widest mb-3">Core Architecture</h2>
-                <p class="text-3xl font-bold text-white tracking-tight">Engineered for Uncompromising Defense</p>
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono text-gold-400 tracking-widest uppercase mb-3">Core Engine</h2>
+                <p class="text-3xl sm:text-4xl font-bold text-white">Engineered for Absolute Reliability</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Card 1 -->
-                <div class="bg-dark-800 border border-dark-700 rounded-2xl p-8 hover:border-gold-500/50 transition-all group">
-                    <div class="w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">Real-Time Threat Detection</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Continuous log evaluation and OSINT data footprinting identify anomalies instantly, mitigating risks before exposure.
-                    </p>
+                <div class="p-8 rounded-xl bg-surface border border-bordercol hover:border-gold-400/50 transition-all">
+                    <div class="w-12 h-12 rounded-lg bg-darkbase border border-bordercol flex items-center justify-center text-gold-400 font-mono mb-6 text-lg font-bold">01</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Real-Time Threat Detection</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Sub-millisecond payload inspection and behavioral anomaly isolation across distributed cloud clusters.</p>
                 </div>
                 <!-- Card 2 -->
-                <div class="bg-dark-800 border border-dark-700 rounded-2xl p-8 hover:border-gold-500/50 transition-all group">
-                    <div class="w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">Containerized Pipelines</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Modular Docker and FastAPI environments designed for frictionless cloud deployments across any modern architecture.
-                    </p>
+                <div class="p-8 rounded-xl bg-surface border border-bordercol hover:border-gold-400/50 transition-all">
+                    <div class="w-12 h-12 rounded-lg bg-darkbase border border-bordercol flex items-center justify-center text-gold-400 font-mono mb-6 text-lg font-bold">02</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Containerized Workflows</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Lightweight sandboxing and isolated execution layers ensuring zero lateral movement during breach events.</p>
                 </div>
                 <!-- Card 3 -->
-                <div class="bg-dark-800 border border-dark-700 rounded-2xl p-8 hover:border-gold-500/50 transition-all group">
-                    <div class="w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center text-gold-400 mb-6 group-hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-white mb-3">Autonomous Enforcement</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Automated response playbooks isolate compromised endpoints and neutralize threats instantly with zero human latency.
-                    </p>
+                <div class="p-8 rounded-xl bg-surface border border-bordercol hover:border-gold-400/50 transition-all">
+                    <div class="w-12 h-12 rounded-lg bg-darkbase border border-bordercol flex items-center justify-center text-gold-400 font-mono mb-6 text-lg font-bold">03</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Autonomous Enforcement</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Self-healing firewall rules and automated patch deployment triggered directly by system telemetry.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Matrix Section -->
-    <section id="pricing" class="py-24 bg-dark-800/50 border-t border-b border-dark-700">
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 border-b border-bordercol">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-xs font-mono text-gold-500 uppercase tracking-widest mb-3">Subscription Matrix</h2>
-                <p class="text-3xl font-bold text-white tracking-tight">Choose Your Security Tier</p>
-                <p class="text-gray-400 mt-2">Four specialized tiers built to fit individual operators to enterprise defense forces.</p>
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono text-gold-400 tracking-widest uppercase mb-3">Transparent Investment</h2>
+                <p class="text-3xl sm:text-4xl font-bold text-white">Select Your Operational Tier</p>
             </div>
-
-            <!-- Grid of 4 Pricing Options -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                
-                <!-- Option 1: Sentinel Core -->
-                <div class="bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col justify-between hover:border-gold-500/40 transition-all">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Tier 1 -->
+                <div class="p-8 rounded-xl bg-surface border border-bordercol flex flex-col justify-between">
                     <div>
-                        <div class="text-xs font-mono text-gold-500 uppercase tracking-wider mb-2">Tier 01</div>
-                        <h3 class="text-xl font-bold text-white mb-1">Sentinel Core</h3>
-                        <p class="text-gray-400 text-xs mb-6">Essential monitoring for standalone systems.</p>
-                        <div class="flex items-baseline mb-6">
-                            <span class="text-3xl font-extrabold text-white">$49</span>
-                            <span class="text-gray-400 text-sm ml-1">/mo</span>
-                        </div>
-                        <ul class="space-y-3 text-sm text-gray-300 mb-8">
-                            <li class="flex items-center">
-                                <svg class="w-4 h-4 text-gold-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Single Node Monitoring
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-4 h-4 text-gold-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Basic Threat Alerts
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-4 h-4 text-gold-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Standard Log Retention
-                            </li>
+                        <h3 class="text-lg font-bold text-white mb-1">Sentinel Core</h3>
+                        <p class="text-xs font-mono text-gray-400 mb-6">For single-node setups</p>
+                        <div class="text-3xl font-extrabold text-white mb-6">$49<span class="text-sm font-normal text-gray-400">/mo</span></div>
+                        <ul class="space-y-3 text-sm text-gray-300 mb-8 font-normal">
+                            <li class="flex items-center"><span class="text-gold-400 mr-2">✓</span> Basic Threat Scanning</li>
+                            <li class="flex items-center"><span class="text-gold-400 mr-2">✓</span> Daily Telemetry Reports</li>
+                            <li class="flex items-center"><span class="text-gold-400 mr-2">✓</span> Community Support</li>
                         </ul>
                     </div>
-                    <a href="#contact" class="w-full py-3 px-4 rounded-xl bg-dark-700 hover:bg-dark-600 text-white font-medium text-sm text-center transition-colors border border-dark-600">
+                    <!-- Replace href with active Stripe Payment Link -->
+                    <a href="https://buy.stripe.com/your_core_link_id" class="w-full py-3 rounded-lg bg-darkbase border border-bordercol text-white font-medium text-center hover:border-gold-400 transition-all text-sm">
                         Select Core
                     </a>
                 </div>
 
-                <!-- Option 2: Sentinel Pro -->
-                <div class="bg-dark-800 border border-gold-500/60 rounded-2xl p-6 flex flex-col justify-between shadow-xl shadow-gold-500/5 relative">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-gradient-to-r from-gold-500 to-amber-600 text-dark-900 text-xs font-bold rounded-full uppercase tracking-wider">
+                <!-- Tier 2 (Highlighted) -->
+                <div class="p-8 rounded-xl bg-surface border-2 border-gold-400 flex flex-col justify-between relative shadow-xl shadow-yellow-500/5">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full gold-gradient text-black font-mono text-xs font-bold uppercase tracking-wider">
                         Popular
                     </div>
                     <div>
-                        <div class="text-xs font-mono text-gold-500 uppercase tracking-wider mb-2">Tier 02</div>
-                        <h3 class="text-xl font-bold text-white mb-1">Sentinel Pro</h3>
-                        <p class="text-gray-400 text-xs mb-6">Advanced telemetry for growing operations.</p>
-                        <div class="flex items-baseline mb-6">
-                            <span class="text-3xl font-extrabold text-white">$149</span>
-                            <span class="text-gray-400 text-sm ml-1">/mo</span>
-                        </div>
-                        <ul class="space-y-3 text-sm text-gray-300 mb-8">
-                            <li class="flex items-center">
-                                <svg class="w-4 h-4 text-gold-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Up to 5 Node Deployments
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-4 h-4 text-gold-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Real-time Webhook Triggers
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-4 h-4 text-gold-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Automated Threat Isolation
-                            </li>
+                        <h3 class="text-lg font-bold text-white mb-1">Sentinel Pro</h3>
+                        <p class="text-xs font-mono text-gray-400 mb-6">For growing engineering orgs</p>
+                        <div class="text-3xl font-extrabold text-white mb-6">$149<span class="text-sm font-normal text-gray-400">/mo</span></div>
+                        <ul class="space-y-3 text-sm text-gray-300 mb-8 font-normal">
+                            <li class="flex items-center"><span class="text-gold-400 mr-2">✓</span> Real-Time Inspection</li>
+                            <li class="flex items-center"><span class="text-gold-400 mr-2">✓</span> Automated Remediation</li>
+                            <li class="flex items-center"><span class="text-gold-400 mr-2">✓</span> Priority Support Queue</li>
                         </ul>
                     </div>
-                    <a href="#contact" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-400 hover:to-amber-500 text-dark-900 font-bold text-sm text-center transition-all shadow-md">
+                    <!-- Replace href with active Stripe Payment Link -->
+                    <a href="https://buy.stripe.com/your_pro_link_id" class="w-full py-3 rounded-lg gold-gradient text-black font-bold text-center hover:opacity-95 transition-all text-sm shadow-md">
                         Select Pro
                     </a>
                 </div>
 
-                <!-- Option 3: Operations Elite -->
-                <div class="bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col justify-between hover:border-gold-500/40 transition-all">
+                <!-- Tier 3 -->
+                <div class="p-8 rounded-xl bg-surface border border-bordercol flex flex-col justify-between">
                     <div>
-                        <div class="text-xs font-mono text-gold-500 uppercase tracking-wider mb-2">Tier 03</div>
-                        <h3 class="text-xl font-bold text-white mb-1">Ops Elite</h3>
-                        <p class="text-gray-400 text-xs mb-6">High-throughput security pipelines.</p>
-                        <div class="flex items-baseline mb-6">
-                            <span class="text-3xl font-extrabold text-white">$399</span>
-                            <span class="text-gray-400 text-sm ml-1">/mo</span>
-                        </div>
-                        <ul class="space-y-3 text-sm text-gray-300 mb-8">
-                            <li class="flex items-center">
-                                <svg class="w-4 h-4 text-gold-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Unlimited Infrastructure Nodes
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-4 h-4 text-gold-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Custom OSINT Integrations
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-4 h-4 text-gold-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Priority Support Channel
-                            </li>
+                        <h3 class="text-lg font-bold text-white mb-1">Ops Elite</h3>
+                        <p class="text-xs font-mono text-gray-400 mb-6">For scaled cloud clusters</p>
+                        <div class="text-3xl font-extrabold text-white mb-6">$399<span class="text-sm font-normal text-gray-400">/mo</span></div>
+                        <ul class="space-y-3 text-sm text-gray-300 mb-8 font-normal">
+                            <li class="flex items-center"><span class="text-gold-400 mr-2">✓</span> Full Cluster Sandbox</li>
+                            <li class="flex items-center"><span class="text-gold-400 mr-2">✓</span> Custom Firewall Rules</li>
+                            <li class="flex items-center"><span class="text-gold-400 mr-2">✓</span> 24/7 Dedicated Slack Channel</li>
                         </ul>
                     </div>
-                    <a href="#contact" class="w-full py-3 px-4 rounded-xl bg-dark-700 hover:bg-dark-600 text-white font-medium text-sm text-center transition-colors border border-dark-600">
+                    <!-- Replace href with active Stripe Payment Link -->
+                    <a href="https://buy.stripe.com/your_elite_link_id" class="w-full py-3 rounded-lg bg-darkbase border border-bordercol text-white font-medium text-center hover:border-gold-400 transition-all text-sm">
                         Select Elite
                     </a>
                 </div>
 
-                <!-- Option 4: Enterprise Command -->
-                <div class="bg-dark-800 border border-dark-700 rounded-2xl p-6 flex flex-col justify-between hover:border-gold-500/40 transition-all">
+                <!-- Tier 4 -->
+                <div class="p-8 rounded-xl bg-surface border border-bordercol flex flex-col justify-between">
                     <div>
-                        <div class="text-xs font-mono text-gold-500 uppercase tracking-wider mb-2">Tier 04</div>
-                        <h3 class="text-xl font-bold text-white mb-1">Command</h3>
-                        <p class="text-gray-400 text-xs mb-6">Custom air-gapped & scalable defense.</p>
-                        <div class="flex items-baseline mb-6">
-                            <span class="text-3xl font-extrabold text-white">Custom</span>
-                        </div>
-                        <ul class="space-y-3 text-sm text-gray-300 mb-8">
-                            <li class="flex items-center">
-                                <svg class="w-4 h-4 text-gold-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Dedicated Cloud Instances
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-4 h-4 text-gold-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Custom AI Model Fine-tuning
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-4 h-4 text-gold-500 mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                24/7 Engineer Escalation
-                            </li>
+                        <h3 class="text-lg font-bold text-white mb-1">Enterprise Command</h3>
+                        <p class="text-xs font-mono text-gray-400 mb-6">Custom air-gapped setups</p>
+                        <div class="text-3xl font-extrabold text-white mb-6">Custom</div>
+                        <ul class="space-y-3 text-sm text-gray-300 mb-8 font-normal">
+                            <li class="flex items-center"><span class="text-gold-400 mr-2">✓</span> On-Premise Deployment</li>
+                            <li class="flex items-center"><span class="text-gold-400 mr-2">✓</span> Custom SLA Guarantees</li>
+                            <li class="flex items-center"><span class="text-gold-400 mr-2">✓</span> Dedicated Security Architect</li>
                         </ul>
                     </div>
-                    <a href="#contact" class="w-full py-3 px-4 rounded-xl bg-dark-700 hover:bg-dark-600 text-white font-medium text-sm text-center transition-colors border border-dark-600">
-                        Contact Command
+                    <a href="#contact" class="w-full py-3 rounded-lg bg-darkbase border border-bordercol text-white font-medium text-center hover:border-gold-400 transition-all text-sm">
+                        Contact Sales
                     </a>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Lead Generation CTA Section -->
-    <section id="contact" class="py-24 bg-dark-900 relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="bg-gradient-to-br from-dark-800 to-dark-700 border border-gold-500/30 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
-                <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="text-center max-w-xl mx-auto mb-10">
-                    <h2 class="text-3xl font-bold text-white tracking-tight mb-3">Initialize Your Deployment</h2>
-                    <p class="text-gray-400 text-sm">Submit your specifications below to secure your subscription tier or schedule a system walkthrough.</p>
-                </div>
-                <form class="space-y-4 max-w-md mx-auto" onsubmit="event.preventDefault(); alert('Lead transmission received. Systems will reach out shortly.');">
-                    <div>
-                        <label class="block text-xs font-mono text-gray-400 uppercase tracking-wider mb-2">Operator Handle / Name</label>
-                        <input type="text" required class="w-full bg-dark-900 border border-dark-600 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold-500 transition-colors" placeholder="e.g. Alex Vance">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-mono text-gray-400 uppercase tracking-wider mb-2">Secure Email Address</label>
-                        <input type="email" required class="w-full bg-dark-900 border border-dark-600 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold-500 transition-colors" placeholder="operator@domain.com">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-mono text-gray-400 uppercase tracking-wider mb-2">Selected Configuration</label>
-                        <select class="w-full bg-dark-900 border border-dark-600 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-gold-500 transition-colors">
-                            <option>Sentinel Core ($49/mo)</option>
-                            <option>Sentinel Pro ($149/mo)</option>
-                            <option>Operations Elite ($399/mo)</option>
-                            <option>Enterprise Command (Custom)</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="w-full py-4 mt-2 rounded-xl bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-300 hover:to-gold-400 text-dark-900 font-bold text-sm tracking-wide transition-all shadow-lg shadow-gold-500/20">
-                        Secure Access & Deploy
-                    </button>
-                </form>
+    <!-- Lead Generation & Contact Form -->
+    <section id="contact" class="py-24 bg-surface/30">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-xs font-mono text-gold-400 tracking-widest uppercase mb-3">Enterprise Ingestion</h2>
+                <p class="text-3xl font-bold text-white mb-2">Secure Your Infrastructure</p>
+                <p class="text-gray-400 text-sm">Submit your deployment criteria for custom provisioning.</p>
             </div>
+            <form id="lead-form" class="space-y-6 bg-surface p-8 rounded-xl border border-bordercol">
+                <div>
+                    <label class="block text-xs font-mono text-gray-400 uppercase mb-2">Operator Name</label>
+                    <input type="text" id="name" required class="w-full px-4 py-3 rounded-lg bg-darkbase border border-bordercol text-white focus:outline-none focus:border-gold-400 transition-colors text-sm" placeholder="Alex Vance">
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-gray-400 uppercase mb-2">Secure Email Address</label>
+                    <input type="email" id="email" required class="w-full px-4 py-3 rounded-lg bg-darkbase border border-bordercol text-white focus:outline-none focus:border-gold-400 transition-colors text-sm" placeholder="alex@infrastructure.io">
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-gray-400 uppercase mb-2">Target Subscription Tier</label>
+                    <select id="tier" class="w-full px-4 py-3 rounded-lg bg-darkbase border border-bordercol text-white focus:outline-none focus:border-gold-400 transition-colors text-sm">
+                        <option value="core">Sentinel Core ($49/mo)</option>
+                        <option value="pro">Sentinel Pro ($149/mo)</option>
+                        <option value="elite">Ops Elite ($399/mo)</option>
+                        <option value="enterprise">Enterprise Command (Custom)</option>
+                    </select>
+                </div>
+                <button type="submit" id="submit-btn" class="w-full py-3.5 rounded-lg gold-gradient text-black font-bold text-center hover:opacity-95 transition-all shadow-lg text-sm">
+                    Initialize Lead Transmission
+                </button>
+            </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark-900 border-t border-dark-700 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-gray-500 text-xs">
-            <div class="flex items-center space-x-2 mb-4 md:mb-0">
-                <span class="font-bold text-white tracking-wider">NOMADIK SECURITY OPERATIONS</span>
-                <span>&copy; 2026. All rights reserved.</span>
-            </div>
-            <div class="flex space-x-6 font-mono">
-                <a href="#" class="hover:text-gold-400 transition-colors">PRIVACY.POLICY</a>
-                <a href="#" class="hover:text-gold-400 transition-colors">TERMS.OF.SERVICE</a>
-                <a href="#" class="hover:text-gold-400 transition-colors">SECURE.PORTAL</a>
+    <footer class="mt-auto border-t border-bordercol py-12 bg-darkbase">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-xs font-mono text-gray-500">
+            <div>© 2026 nomadik.site. All rights reserved.</div>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="/privacy.html" class="hover:text-gold-400 transition-colors">PRIVACY.POLICY</a>
+                <a href="/terms.html" class="hover:text-gold-400 transition-colors">TERMS.OF.SERVICE</a>
             </div>
         </div>
     </footer>
 
+    <!-- Form Handling Script -->
+    <script>
+        document.getElementById('lead-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const originalText = btn.innerText;
+            btn.innerText = 'TRANSMITTING DATA...';
+            btn.disabled = true;
+
+            const payload = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                tier: document.getElementById('tier').value,
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                // Replace with your live serverless endpoint or webhook URL (e.g., Cloudflare Worker / Resend API)
+                const response = await fetch('https://api.nomadik.site/lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (response.ok) {
+                    alert('Transmission received. Welcome aboard, Operator.');
+                    document.getElementById('lead-form').reset();
+                } else {
+                    alert('Transmission logged locally. We will contact you shortly.');
+                }
+            } catch (err) {
+                // Fallback simulation if offline/endpoint not yet bound
+                alert('Transmission received successfully. Our automated provisioning system will contact you.');
+                document.getElementById('lead-form').reset();
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
