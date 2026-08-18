@@ -1,8 +1,8 @@
 import React from 'react';
 
 export default function PricingSection() {
-  const handleCheckout = (priceId: string) => {
-    window.location.href = `/api/checkout?priceId=${priceId}`;
+  const handleCheckout = (productKey: string) => {
+    window.location.href = `/api/checkout?product=${encodeURIComponent(productKey)}`;
   };
 
   return (
@@ -32,7 +32,7 @@ export default function PricingSection() {
                 <span className="text-slate-400 text-sm"> / emergency event</span>
               </div>
               <button
-                onClick={() => handleCheckout('price_1TwgHMD5LVILsj0FdCUQpuWt')}
+                onClick={() => handleCheckout('emergency_1499')}
                 className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3 px-6 rounded-xl transition duration-200 shadow-lg shadow-red-600/30 text-center"
               >
                 Dispatch Response Team
@@ -70,7 +70,7 @@ export default function PricingSection() {
               </ul>
             </div>
             <button
-              onClick={() => handleCheckout('price_basic_monthly')}
+              onClick={() => handleCheckout('starter')}
               className="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-2.5 px-4 rounded-xl transition"
             >
               Get Started
@@ -97,7 +97,7 @@ export default function PricingSection() {
               </ul>
             </div>
             <button
-              onClick={() => handleCheckout('price_standard_monthly')}
+              onClick={() => handleCheckout('professional')}
               className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 px-4 rounded-xl transition"
             >
               Get Started
@@ -121,7 +121,7 @@ export default function PricingSection() {
               </ul>
             </div>
             <button
-              onClick={() => handleCheckout('price_premium_monthly')}
+              onClick={() => handleCheckout('pro')}
               className="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-2.5 px-4 rounded-xl transition"
             >
               Get Started

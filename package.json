@@ -4,7 +4,7 @@
   "description": "Nomadik Security Operations Sentinel Dashboard",
   "main": "index.html",
   "scripts": {
-    "build": "echo 'Static assets ready for Cloudflare Pages'",
+    "build": "rm -rf dist && mkdir -p dist && cp index.html dist/index.html && cp _headers dist/_headers",
     "lint": "echo 'No linting required for static assets'",
     "start": "node server.js"
   },

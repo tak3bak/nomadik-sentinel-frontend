@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomadik Security Operations - Pricing</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .pricing-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .pricing-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            align-stretch;
+        }
+
+        .pricing-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent-color);
+        }
+
+        .badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-color);
+            color: #0f172a;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        .tier-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .tier-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .tier-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .tier-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 32px 0;
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .tier-features li {
+            padding: 8px 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+        }
+
+        .tier-features li:last-child {
+            border-bottom: none;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #0f172a;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .pricing-card:not(.featured) .cta-button {
+            background-color: #334155;
+            color: var(--text-main);
+        }
+
+        .pricing-card:not(.featured) .cta-button:hover {
+            background-color: #475569;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="pricing-container">
+        <div class="pricing-header">
+            <h1>Deployment Tiers</h1>
+            <p>Select the operational capability level that matches your security infrastructure.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Sentinel Core -->
+            <div class="pricing-card">
+                <div class="tier-name">Sentinel Core</div>
+                <div class="tier-price">$49<span>/mo</span></div>
+                <ul class="tier-features">
+                    <li>✓ Baseline security audit automation</li>
+                    <li>✓ Standard log inspection loops</li>
+                    <li>✓ Single-node deployment support</li>
+                    <li>✓ Community ticket assistance</li>
+                </ul>
+                <a href="https://buy.stripe.com/live_core_placeholder_link" class="cta-button" target="_blank" rel="noopener noreferrer">Deploy Core</a>
+            </div>
+
+            <!-- Sentinel Pro -->
+            <div class="pricing-card featured">
+                <div class="badge">Most Popular</div>
+                <div class="tier-name">Sentinel Pro</div>
+                <div class="tier-price">$149<span>/mo</span></div>
+                <ul class="tier-features">
+                    <li>✓ Advanced containerized monitoring</li>
+                    <li>✓ Automated threat intelligence feeds</li>
+                    <li>✓ Multi-node orchestration architecture</li>
+                    <li>✓ Priority webhook routing & alerts</li>
+                </ul>
+                <a href="https://buy.stripe.com/live_pro_placeholder_link" class="cta-button" target="_blank" rel="noopener noreferrer">Deploy Pro</a>
+            </div>
+
+            <!-- Ops Elite -->
+            <div class="pricing-card">
+                <div class="tier-name">Ops Elite</div>
+                <div class="tier-price">$399<span>/mo</span></div>
+                <ul class="tier-features">
+                    <li>✓ Full-suite OSINT & footprinting modules</li>
+                    <li>✓ Dedicated high-frequency pipelines</li>
+                    <li>✓ Custom microservice integrations</li>
+                    <li>✓ 24/7 priority operational support</li>
+                </ul>
+                <a href="https://buy.stripe.com/live_elite_placeholder_link" class="cta-button" target="_blank" rel="noopener noreferrer">Deploy Elite</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
