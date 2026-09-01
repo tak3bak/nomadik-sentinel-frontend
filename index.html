@@ -1,195 +1,236 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomadik Security Operations - Pricing</title>
+    <title>Nomadik Systems | Luxury Enterprise Security & Architecture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            black: '#0a0a0a',
+                            charcoal: '#141414',
+                            surface: '#1c1c1c',
+                            border: '#2a2a2a',
+                            goldLight: '#fcf6ba',
+                            gold: '#d4af37',
+                            goldDark: '#aa771c',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #38bdf8;
-            --accent-hover: #0ea5e9;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 40px 20px;
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #bf953f 0%, #d4af37 50%, #aa771c 100%);
         }
-
-        .pricing-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
-
-        .pricing-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .pricing-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            align-stretch;
-        }
-
-        .pricing-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 32px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        .pricing-card.featured {
-            border-color: var(--accent-color);
-        }
-
-        .badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--accent-color);
-            color: #0f172a;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 4px 12px;
-            border-radius: 20px;
-            letter-spacing: 0.05em;
-        }
-
-        .tier-name {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .tier-price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-        }
-
-        .tier-price span {
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--text-muted);
-        }
-
-        .tier-features {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 32px 0;
-            text-align: left;
-            flex-grow: 1;
-        }
-
-        .tier-features li {
-            padding: 8px 0;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(51, 65, 85, 0.4);
-        }
-
-        .tier-features li:last-child {
-            border-bottom: none;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: #0f172a;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 12px 24px;
-            border-radius: 8px;
-            transition: background-color 0.2s ease;
-            text-align: center;
-        }
-
-        .cta-button:hover {
-            background-color: var(--accent-hover);
-        }
-
-        .pricing-card:not(.featured) .cta-button {
-            background-color: #334155;
-            color: var(--text-main);
-        }
-
-        .pricing-card:not(.featured) .cta-button:hover {
-            background-color: #475569;
+        .gold-border:hover {
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
         }
     </style>
 </head>
-<body>
+<body class="bg-luxury-black text-gray-300 font-sans antialiased selection:bg-luxury-gold selection:text-black">
 
-    <div class="pricing-container">
-        <div class="pricing-header">
-            <h1>Deployment Tiers</h1>
-            <p>Select the operational capability level that matches your security infrastructure.</p>
-        </div>
+    <header class="fixed top-0 left-0 right-0 z-50 bg-luxury-black/90 backdrop-blur-md border-b border-luxury-border">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-full gold-gradient-bg p-[1px] flex items-center justify-center">
+                    <div class="w-full h-full bg-luxury-black rounded-full flex items-center justify-center">
+                        <span class="font-serif font-bold text-luxury-gold text-lg">N</span>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold text-lg tracking-wider text-white group-hover:text-luxury-gold transition-colors">NOMADIK</span>
+                    <span class="text-[10px] uppercase tracking-widest text-luxury-gold">Systems</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-sm tracking-wide">
+                <a href="#services" class="hover:text-luxury-gold transition-colors">Services</a>
+                <a href="#sentinel" class="hover:text-luxury-gold transition-colors">Security Sentinel</a>
+                <a href="#pricing" class="hover:text-luxury-gold transition-colors">Pricing</a>
+                <a href="#contact" class="hover:text-luxury-gold transition-colors">Contact</a>
+            </nav>
 
-        <div class="pricing-grid">
-            <!-- Sentinel Core -->
-            <div class="pricing-card">
-                <div class="tier-name">Sentinel Core</div>
-                <div class="tier-price">$49<span>/mo</span></div>
-                <ul class="tier-features">
-                    <li>✓ Baseline security audit automation</li>
-                    <li>✓ Standard log inspection loops</li>
-                    <li>✓ Single-node deployment support</li>
-                    <li>✓ Community ticket assistance</li>
-                </ul>
-                <a href="https://buy.stripe.com/live_core_placeholder_link" class="cta-button" target="_blank" rel="noopener noreferrer">Deploy Core</a>
-            </div>
-
-            <!-- Sentinel Pro -->
-            <div class="pricing-card featured">
-                <div class="badge">Most Popular</div>
-                <div class="tier-name">Sentinel Pro</div>
-                <div class="tier-price">$149<span>/mo</span></div>
-                <ul class="tier-features">
-                    <li>✓ Advanced containerized monitoring</li>
-                    <li>✓ Automated threat intelligence feeds</li>
-                    <li>✓ Multi-node orchestration architecture</li>
-                    <li>✓ Priority webhook routing & alerts</li>
-                </ul>
-                <a href="https://buy.stripe.com/live_pro_placeholder_link" class="cta-button" target="_blank" rel="noopener noreferrer">Deploy Pro</a>
-            </div>
-
-            <!-- Ops Elite -->
-            <div class="pricing-card">
-                <div class="tier-name">Ops Elite</div>
-                <div class="tier-price">$399<span>/mo</span></div>
-                <ul class="tier-features">
-                    <li>✓ Full-suite OSINT & footprinting modules</li>
-                    <li>✓ Dedicated high-frequency pipelines</li>
-                    <li>✓ Custom microservice integrations</li>
-                    <li>✓ 24/7 priority operational support</li>
-                </ul>
-                <a href="https://buy.stripe.com/live_elite_placeholder_link" class="cta-button" target="_blank" rel="noopener noreferrer">Deploy Elite</a>
+            <div>
+                <a href="#pricing" class="gold-gradient-bg text-black font-semibold text-sm px-5 py-2.5 rounded-sm tracking-wider uppercase hover:opacity-90 transition-opacity shadow-lg">
+                    Client Portal
+                </a>
             </div>
         </div>
-    </div>
+    </header>
+
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden border-b border-luxury-border">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-luxury-surface via-luxury-black to-luxury-black -z-10"></div>
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-luxury-surface border border-luxury-border mb-6">
+                <span class="w-2 h-2 rounded-full bg-luxury-gold animate-pulse"></span>
+                <span class="text-xs uppercase tracking-widest text-luxury-gold font-medium">Enterprise-Grade Active Defense</span>
+            </div>
+            <h1 class="font-serif text-4xl md:text-6xl font-bold text-white tracking-tight mb-6 leading-tight">
+                Uncompromising Security & <span class="gold-gradient-text">Architectural Excellence</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Precision-engineered containerized infrastructure, real-time SIEM monitoring, and automated compliance solutions built for high-stakes digital assets.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#pricing" class="w-full sm:w-auto gold-gradient-bg text-black font-bold px-8 py-4 rounded-sm tracking-wider uppercase hover:opacity-95 transition-all text-sm shadow-xl">
+                    Deploy Infrastructure
+                </a>
+                <a href="#services" class="w-full sm:w-auto bg-luxury-surface border border-luxury-border text-white px-8 py-4 rounded-sm tracking-wider uppercase hover:border-luxury-gold transition-all text-sm">
+                    Explore Architecture
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-luxury-charcoal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-xs uppercase tracking-[0.25em] text-luxury-gold mb-3 font-semibold">Core Capabilities</h2>
+                <h3 class="font-serif text-3xl md:text-4xl font-bold text-white">Engineered for Absolute Resilience</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-luxury-surface p-8 rounded-sm gold-border transition-all duration-300">
+                    <div class="w-12 h-12 rounded bg-luxury-black border border-luxury-border flex items-center justify-center text-luxury-gold mb-6 font-serif font-bold text-xl">01</div>
+                    <h4 class="font-serif text-xl font-bold text-white mb-3">Active Defense SIEM</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Advanced Wazuh SIEM deployment with real-time log analysis, integrity monitoring, and immediate automated threat containment workflows.
+                    </p>
+                    <span class="text-xs text-luxury-gold uppercase tracking-widest font-semibold flex items-center">
+                        Secure Infrastructure &rarr;
+                    </span>
+                </div>
+
+                <div class="bg-luxury-surface p-8 rounded-sm gold-border transition-all duration-300">
+                    <div class="w-12 h-12 rounded bg-luxury-black border border-luxury-border flex items-center justify-center text-luxury-gold mb-6 font-serif font-bold text-xl">02</div>
+                    <h4 class="font-serif text-xl font-bold text-white mb-3">Containerized Architecture</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Scalable Docker Compose and FastAPI microservice topologies designed for zero-downtime execution and isolated containerized persistence.
+                    </p>
+                    <span class="text-xs text-luxury-gold uppercase tracking-widest font-semibold flex items-center">
+                        High-Performance Scale &rarr;
+                    </span>
+                </div>
+
+                <div class="bg-luxury-surface p-8 rounded-sm gold-border transition-all duration-300">
+                    <div class="w-12 h-12 rounded bg-luxury-black border border-luxury-border flex items-center justify-center text-luxury-gold mb-6 font-serif font-bold text-xl">03</div>
+                    <h4 class="font-serif text-xl font-bold text-white mb-3">Compliance Automation</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Automated auditing frameworks mapped strictly to SOC 2, HIPAA, and CMMC 2.0 standards with continuous reporting pipelines.
+                    </p>
+                    <span class="text-xs text-luxury-gold uppercase tracking-widest font-semibold flex items-center">
+                        Audit Readiness &rarr;
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-24 bg-luxury-black border-t border-luxury-border">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-xs uppercase tracking-[0.25em] text-luxury-gold mb-3 font-semibold">Commercial Onboarding</h2>
+                <h3 class="font-serif text-3xl md:text-4xl font-bold text-white">Select Your Deployment Tier</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-luxury-surface p-8 rounded-sm gold-border flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <h4 class="font-serif text-2xl font-bold text-white">Security Sentinel</h4>
+                            <span class="text-xs uppercase tracking-widest px-3 py-1 rounded bg-luxury-black text-luxury-gold border border-luxury-border">Standard</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-6">Continuous active defense, vulnerability assessment, and Wazuh log aggregation for modern tech stacks.</p>
+                        <div class="text-3xl font-serif font-bold text-white mb-6">$499<span class="text-sm font-sans text-gray-400 font-normal"> / month</span></div>
+                        <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center space-x-3">
+                                <span class="text-luxury-gold">&#10003;</span>
+                                <span>Real-Time SIEM Event Monitoring</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <span class="text-luxury-gold">&#10003;</span>
+                                <span>Automated Threat Mitigation</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <span class="text-luxury-gold">&#10003;</span>
+                                <span>Cloudflare Edge WAF Integration</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="https://buy.stripe.com/your_sentinel_link_here" class="w-full text-center bg-luxury-black border border-luxury-gold text-luxury-gold font-semibold py-3.5 rounded-sm uppercase tracking-wider text-xs hover:bg-luxury-gold hover:text-black transition-all">
+                        Initialize Sentinel Tier
+                    </a>
+                </div>
+
+                <div class="bg-luxury-surface p-8 rounded-sm gold-border relative flex flex-col justify-between shadow-2xl">
+                    <div class="absolute -top-3 right-6 gold-gradient-bg text-black text-[10px] uppercase tracking-widest font-bold px-3 py-1 rounded-sm">
+                        Recommended
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <h4 class="font-serif text-2xl font-bold text-white">Enterprise Systems</h4>
+                            <span class="text-xs uppercase tracking-widest px-3 py-1 rounded bg-luxury-black text-luxury-gold border border-luxury-border">Full Stack</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-6">Complete custom systems engineering, high-performance API gateways, compliance mapping, and dedicated architecture support.</p>
+                        <div class="text-3xl font-serif font-bold text-white mb-6">$1,499<span class="text-sm font-sans text-gray-400 font-normal"> / month</span></div>
+                        <ul class="space-y-3 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center space-x-3">
+                                <span class="text-luxury-gold">&#10003;</span>
+                                <span>Custom FastAPI & Docker Architectures</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <span class="text-luxury-gold">&#10003;</span>
+                                <span>SOC 2 & HIPAA Compliance Auditing</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <span class="text-luxury-gold">&#10003;</span>
+                                <span>24/7 Priority Security Engineering</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="https://buy.stripe.com/your_enterprise_link_here" class="w-full text-center gold-gradient-bg text-black font-bold py-3.5 rounded-sm uppercase tracking-wider text-xs hover:opacity-90 transition-all shadow-lg">
+                        Deploy Enterprise Tier
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-luxury-black border-t border-luxury-border py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 space-y-4 md:space-y-0">
+            <div class="flex items-center space-x-2">
+                <span class="font-serif text-white font-bold tracking-wider">NOMADIK SYSTEMS</span>
+                <span>&copy; 2026. All Rights Reserved.</span>
+            </div>
+            <div class="flex space-x-6">
+                <a href="https://nomadik.site" class="hover:text-luxury-gold transition-colors">nomadik.site</a>
+                <a href="#services" class="hover:text-luxury-gold transition-colors">Security Architecture</a>
+                <a href="#pricing" class="hover:text-luxury-gold transition-colors">Client Portal</a>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
