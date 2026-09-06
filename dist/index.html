@@ -1,195 +1,667 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K8E8PSBC6R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-K8E8PSBC6R");
+  </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomadik Security Operations - Pricing</title>
+    <title>Nomadik Systems | Luxury Enterprise Security & Architecture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #38bdf8;
-            --accent-hover: #0ea5e9;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
+            --luxury-black: #0a0a0a;
+            --luxury-charcoal: #141414;
+            --luxury-surface: #1c1c1c;
+            --luxury-border: #2a2a2a;
+            --luxury-gold-light: #fcf6ba;
+            --luxury-gold: #d4af37;
+            --luxury-gold-dark: #aa771c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 40px 20px;
+            background-color: var(--luxury-black);
+            color: #d1d5db;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .pricing-container {
-            max-width: 1200px;
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Cinzel', serif;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--luxury-border);
+        }
+
+        .nav-container {
+            max-width: 1280px;
             margin: 0 auto;
-            text-align: center;
-        }
-
-        .pricing-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .pricing-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            align-stretch;
-        }
-
-        .pricing-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 32px;
+            padding: 0 24px;
+            height: 80px;
             display: flex;
-            flex-direction: column;
-            position: relative;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .pricing-card.featured {
-            border-color: var(--accent-color);
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
         }
 
-        .badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--accent-color);
-            color: #0f172a;
-            font-size: 0.75rem;
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-gold-dark));
+            padding: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-icon-inner {
+            width: 100%;
+            height: 100%;
+            background-color: var(--luxury-black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--luxury-gold);
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+        }
+
+        .brand-text span {
+            display: block;
+        }
+
+        .brand-title {
+            font-family: 'Cinzel', serif;
             font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: 0.05em;
+            color: #ffffff;
+        }
+
+        .brand-subtitle {
+            font-size: 10px;
             text-transform: uppercase;
-            padding: 4px 12px;
-            border-radius: 20px;
+            letter-spacing: 0.2em;
+            color: var(--luxury-gold);
+        }
+
+        nav.menu {
+            display: flex;
+            gap: 32px;
+            font-size: 0.875rem;
             letter-spacing: 0.05em;
         }
 
-        .tier-name {
-            font-size: 1.5rem;
+        nav.menu a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav.menu a:hover {
+            color: var(--luxury-gold);
+        }
+
+        .portal-btn {
+            background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-gold-dark));
+            color: var(--luxury-black);
             font-weight: 600;
+            font-size: 0.8125rem;
+            padding: 10px 20px;
+            border-radius: 2px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+            transition: opacity 0.2s;
+        }
+
+        .portal-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Hero Section */
+        section.hero {
+            position: relative;
+            padding: 160px 24px 100px;
+            text-align: center;
+            border-bottom: 1px solid var(--luxury-border);
+            background: radial-gradient(circle at top, var(--luxury-surface), var(--luxury-black) 70%);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background-color: var(--luxury-surface);
+            border: 1px solid var(--luxury-border);
+            border-radius: 50px;
+            margin-bottom: 24px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--luxury-gold);
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--luxury-gold);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(212, 175, 55, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .gold-text {
+            background: linear-gradient(135deg, var(--luxury-gold-light) 0%, var(--luxury-gold) 50%, var(--luxury-gold-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 680px;
+            margin: 0 auto 40px;
+            font-size: 1.125rem;
+            color: #9ca3af;
+            font-weight: 300;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-gold-dark));
+            color: var(--luxury-black);
+            font-weight: 700;
+            padding: 16px 32px;
+            border-radius: 2px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8125rem;
+            letter-spacing: 0.1em;
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.25);
+            transition: transform 0.2s;
+        }
+
+        .btn-secondary {
+            background-color: var(--luxury-surface);
+            border: 1px solid var(--luxury-border);
+            color: #ffffff;
+            font-weight: 600;
+            padding: 16px 32px;
+            border-radius: 2px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8125rem;
+            letter-spacing: 0.1em;
+            transition: border-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--luxury-gold);
+        }
+
+        /* Services */
+        section.services {
+            padding: 100px 24px;
+            background-color: var(--luxury-charcoal);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 64px;
+        }
+
+        .section-header h2 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--luxury-gold);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .section-header h3 {
+            font-size: 2.25rem;
+            color: #ffffff;
+        }
+
+        .grid-3 {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .card {
+            background-color: var(--luxury-surface);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 40px 32px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .card-number {
+            width: 48px;
+            height: 48px;
+            background-color: var(--luxury-black);
+            border: 1px solid var(--luxury-border);
+            color: var(--luxury-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 24px;
+            border-radius: 4px;
+        }
+
+        .card h4 {
+            font-size: 1.25rem;
+            color: #ffffff;
             margin-bottom: 12px;
         }
 
-        .tier-price {
-            font-size: 2.5rem;
+        .card p {
+            font-size: 0.9375rem;
+            color: #9ca3af;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .card-link {
+            font-size: 0.75rem;
+            color: var(--luxury-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Pricing Section */
+        section.pricing {
+            padding: 100px 24px;
+            background-color: var(--luxury-black);
+            border-top: 1px solid var(--luxury-border);
+        }
+
+        .grid-2 {
+            max-width: 960px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        .pricing-card {
+            background-color: var(--luxury-surface);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 48px 36px;
+            border-radius: 2px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            border-color: var(--luxury-gold);
+        }
+
+        .featured-tag {
+            position: absolute;
+            top: -12px;
+            right: 32px;
+            background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-gold-dark));
+            color: var(--luxury-black);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
             font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 2px;
+        }
+
+        .pricing-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 24px;
         }
 
-        .tier-price span {
-            font-size: 1rem;
+        .pricing-header h4 {
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+
+        .tier-badge {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 4px 10px;
+            background-color: var(--luxury-black);
+            color: var(--luxury-gold);
+            border: 1px solid var(--luxury-border);
+            border-radius: 2px;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 24px;
+        }
+
+        .price span {
+            font-size: 0.875rem;
+            font-family: 'Inter', sans-serif;
+            color: #9ca3af;
             font-weight: 400;
-            color: var(--text-muted);
         }
 
-        .tier-features {
+        .features-list {
             list-style: none;
-            padding: 0;
-            margin: 0 0 32px 0;
-            text-align: left;
-            flex-grow: 1;
+            margin-bottom: 36px;
         }
 
-        .tier-features li {
-            padding: 8px 0;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+        .features-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.875rem;
+            color: #d1d5db;
+            margin-bottom: 14px;
         }
 
-        .tier-features li:last-child {
-            border-bottom: none;
+        .features-list li span.check {
+            color: var(--luxury-gold);
+            font-weight: bold;
         }
 
-        .cta-button {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: #0f172a;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 12px 24px;
-            border-radius: 8px;
-            transition: background-color 0.2s ease;
+        .btn-tier-outline {
+            display: block;
             text-align: center;
+            background-color: var(--luxury-black);
+            border: 1px solid var(--luxury-gold);
+            color: var(--luxury-gold);
+            font-weight: 600;
+            padding: 14px;
+            border-radius: 2px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            transition: all 0.2s;
         }
 
-        .cta-button:hover {
-            background-color: var(--accent-hover);
+        .btn-tier-outline:hover {
+            background-color: var(--luxury-gold);
+            color: var(--luxury-black);
         }
 
-        .pricing-card:not(.featured) .cta-button {
-            background-color: #334155;
-            color: var(--text-main);
+        .btn-tier-solid {
+            display: block;
+            text-align: center;
+            background: linear-gradient(135deg, var(--luxury-gold), var(--luxury-gold-dark));
+            color: var(--luxury-black);
+            font-weight: 700;
+            padding: 14px;
+            border-radius: 2px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+            transition: opacity 0.2s;
         }
 
-        .pricing-card:not(.featured) .cta-button:hover {
-            background-color: #475569;
+        .btn-tier-solid:hover {
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--luxury-black);
+            border-top: 1px solid var(--luxury-border);
+            padding: 48px 24px;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: #6b7280;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--luxury-gold);
+        }
+
+        @media (max-width: 768px) {
+            nav.menu {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="pricing-container">
-        <div class="pricing-header">
-            <h1>Deployment Tiers</h1>
-            <p>Select the operational capability level that matches your security infrastructure.</p>
-        </div>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="brand">
+                <div class="brand-icon">
+                    <div class="brand-icon-inner">N</div>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">NOMADIK</span>
+                    <span class="brand-subtitle">Systems</span>
+                </div>
+            </a>
+            
+            <nav class="menu">
+                <a href="#services">Services</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+            </nav>
 
-        <div class="pricing-grid">
-            <!-- Sentinel Core -->
-            <div class="pricing-card">
-                <div class="tier-name">Sentinel Core</div>
-                <div class="tier-price">$49<span>/mo</span></div>
-                <ul class="tier-features">
-                    <li>✓ Baseline security audit automation</li>
-                    <li>✓ Standard log inspection loops</li>
-                    <li>✓ Single-node deployment support</li>
-                    <li>✓ Community ticket assistance</li>
-                </ul>
-                <a href="https://buy.stripe.com/live_core_placeholder_link" class="cta-button" target="_blank" rel="noopener noreferrer">Deploy Core</a>
+            <div>
+                <a href="#pricing" class="portal-btn">Client Portal</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="badge">
+            <span class="pulse-dot"></span>
+            <span>Enterprise-Grade Active Defense</span>
+        </div>
+        <h1>Uncompromising Security & <span class="gold-text">Architectural Excellence</span></h1>
+        <p>Precision-engineered containerized infrastructure, real-time SIEM monitoring, and automated compliance solutions built for high-stakes digital assets.</p>
+        <div class="hero-actions">
+            <a href="#pricing" class="btn-primary">Deploy Infrastructure</a>
+            <a href="#services" class="btn-secondary">Explore Architecture</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="section-header">
+            <h2>Core Capabilities</h2>
+            <h3>Engineered for Absolute Resilience</h3>
+        </div>
+        
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-number">01</div>
+                <h4>Active Defense SIEM</h4>
+                <p>Advanced Wazuh SIEM deployment with real-time log analysis, integrity monitoring, and immediate automated threat containment workflows.</p>
+                <a href="#pricing" class="card-link">Secure Infrastructure &rarr;</a>
             </div>
 
-            <!-- Sentinel Pro -->
+            <div class="card">
+                <div class="card-number">02</div>
+                <h4>Containerized Architecture</h4>
+                <p>Scalable Docker Compose and FastAPI microservice topologies designed for zero-downtime execution and isolated containerized persistence.</p>
+                <a href="#pricing" class="card-link">High-Performance Scale &rarr;</a>
+            </div>
+
+            <div class="card">
+                <div class="card-number">03</div>
+                <h4>Compliance Automation</h4>
+                <p>Automated auditing frameworks mapped strictly to SOC 2, HIPAA, and CMMC 2.0 standards with continuous reporting pipelines.</p>
+                <a href="#pricing" class="card-link">Audit Readiness &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="section-header">
+            <h2>Commercial Onboarding</h2>
+            <h3>Select Your Deployment Tier</h3>
+        </div>
+
+        <div class="grid-2">
+            <!-- Tier 1 -->
+            <div class="pricing-card">
+                <div>
+                    <div class="pricing-header">
+                        <h4>Security Sentinel</h4>
+                        <span class="tier-badge">Standard</span>
+                    </div>
+                    <p style="color: #9ca3af; font-size: 0.875rem; margin-bottom: 24px;">Continuous active defense, vulnerability assessment, and Wazuh log aggregation for modern tech stacks.</p>
+                    <div class="price">$499<span> / month</span></div>
+                    <ul class="features-list">
+                        <li><span class="check">&#10003;</span> Real-Time SIEM Event Monitoring</li>
+                        <li><span class="check">&#10003;</span> Automated Threat Mitigation</li>
+                        <li><span class="check">&#10003;</span> Cloudflare Edge WAF Integration</li>
+                    </ul>
+                </div>
+                <a href="https://buy.stripe.com/your_sentinel_link_here" class="btn-tier-outline">Initialize Sentinel Tier</a>
+            </div>
+
+            <!-- Tier 2 -->
             <div class="pricing-card featured">
-                <div class="badge">Most Popular</div>
-                <div class="tier-name">Sentinel Pro</div>
-                <div class="tier-price">$149<span>/mo</span></div>
-                <ul class="tier-features">
-                    <li>✓ Advanced containerized monitoring</li>
-                    <li>✓ Automated threat intelligence feeds</li>
-                    <li>✓ Multi-node orchestration architecture</li>
-                    <li>✓ Priority webhook routing & alerts</li>
-                </ul>
-                <a href="https://buy.stripe.com/live_pro_placeholder_link" class="cta-button" target="_blank" rel="noopener noreferrer">Deploy Pro</a>
-            </div>
-
-            <!-- Ops Elite -->
-            <div class="pricing-card">
-                <div class="tier-name">Ops Elite</div>
-                <div class="tier-price">$399<span>/mo</span></div>
-                <ul class="tier-features">
-                    <li>✓ Full-suite OSINT & footprinting modules</li>
-                    <li>✓ Dedicated high-frequency pipelines</li>
-                    <li>✓ Custom microservice integrations</li>
-                    <li>✓ 24/7 priority operational support</li>
-                </ul>
-                <a href="https://buy.stripe.com/live_elite_placeholder_link" class="cta-button" target="_blank" rel="noopener noreferrer">Deploy Elite</a>
+                <div class="featured-tag">Recommended</div>
+                <div>
+                    <div class="pricing-header">
+                        <h4>Enterprise Systems</h4>
+                        <span class="tier-badge">Full Stack</span>
+                    </div>
+                    <p style="color: #9ca3af; font-size: 0.875rem; margin-bottom: 24px;">Complete custom systems engineering, high-performance API gateways, compliance mapping, and dedicated architecture support.</p>
+                    <div class="price">$1,499<span> / month</span></div>
+                    <ul class="features-list">
+                        <li><span class="check">&#10003;</span> Custom FastAPI & Docker Architectures</li>
+                        <li><span class="check">&#10003;</span> SOC 2 & HIPAA Compliance Auditing</li>
+                        <li><span class="check">&#10003;</span> 24/7 Priority Security Engineering</li>
+                    </ul>
+                </div>
+                <a href="https://buy.stripe.com/your_enterprise_link_here" class="btn-tier-solid">Deploy Enterprise Tier</a>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span>NOMADIK SYSTEMS</span>
+                <span style="color: #4b5563; font-weight: 300;">&copy; 2026</span>
+            </div>
+            <div class="footer-links">
+                <a href="https://nomadik.site">nomadik.site</a>
+                <a href="#services">Security Architecture</a>
+                <a href="#pricing">Client Portal</a>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>

@@ -15,5 +15,8 @@
     "express": "^5.2.1",
     "resend": "^6.19.0",
     "stripe": "^22.5.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.128.0"
   }
 }
