@@ -1,9 +1,14 @@
-name: "Deploy to Cloudflare Pages"
+name: Deploy to Cloudflare Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   workflow_dispatch:
+
+concurrency:
+  group: cloudflare-pages-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -28,6 +33,13 @@ jobs:
 
       - name: Build Project
         run: npm run build
+
+      - name: Validate Cloudflare Artifacts
+        run: |
+          test -d dist
+          test -f dist/index.html
+          test -f dist/_headers
+          echo "[✓] Verified dist/_headers and dist/index.html exist."
 
       - name: Deploy to Cloudflare Pages via Wrangler
         env:
