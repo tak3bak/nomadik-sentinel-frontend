@@ -46,6 +46,21 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          echo "[*] Deploying dist/ directory to Cloudflare Pages..."
-          npx wrangler pages deploy dist --project-name="nomadik-frontend" --commit-dirty=true || \
-          npx wrangler pages deploy dist --project-name="nomadik-sentinel" --commit-dirty=true
+          echo "=== [1/2] Discovering Existing Cloudflare Pages Projects ==="
+          PROJECTS_JSON=$(curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects" \
+            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            -H "Content-Type: application/json")
+
+          echo "$PROJECTS_JSON" | grep -o '"name":"[^"]*"' || echo "[!] No projects listed or API error"
+
+          # Target project name detection
+          TARGET_PROJECT=$(echo "$PROJECTS_JSON" | grep -o '"name":"[^"]*"' | head -n 1 | cut -d'"' -f4)
+
+          if [ -z "$TARGET_PROJECT" ]; then
+            echo "[*] No project found in account. Creating 'nomadik-sentinel-frontend'..."
+            TARGET_PROJECT="nomadik-sentinel-frontend"
+            npx wrangler pages project create "$TARGET_PROJECT" --production-branch="main" || true
+          fi
+
+          echo "=== [2/2] Deploying dist/ to Project: $TARGET_PROJECT ==="
+          npx wrangler pages deploy dist --project-name="$TARGET_PROJECT" --commit-dirty=true
