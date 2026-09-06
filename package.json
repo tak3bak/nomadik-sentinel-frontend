@@ -4,7 +4,7 @@
   "description": "Nomadik Security Operations Sentinel Dashboard",
   "main": "index.html",
   "scripts": {
-    "build": "rm -rf dist && mkdir -p dist && cp index.html dist/index.html && cp _headers dist/_headers",
+    "build": "rm -rf dist && mkdir -p dist && cp -r index.html _headers *.css *.js assets dist/ 2>/dev/null || cp index.html dist/index.html && cp _headers dist/_headers",
     "lint": "echo 'No linting required for static assets'",
     "start": "node server.js"
   },
