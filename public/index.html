@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nomadik Security Sentinel | Autonomous Cyber Defense & Compliance</title>
+  <meta name="description" content="Continuous compliance visibility, zero-downtime perimeter defense, and automated threat triage without hiring an in-house SOC." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #000000;
+      --bg-surface: #0a0a0c;
+      --bg-card: #121215;
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --border-accent: rgba(255, 215, 0, 0.2);
+      --text-main: #f0f3f6;
+      --text-muted: #8b949e;
+      --text-dim: #647082;
+      --accent-gold: #ffd700;
+      --accent-gold-light: #fff089;
+      --accent-gold-dark: #b8860b;
+      --border-gold: rgba(255, 215, 0, 0.35);
+            --accent-emerald: #ffd700;
+      --accent-amber: #f59e0b;
+      --accent-red: #ef4444;
+      --shadow-glow: 0 0 24px rgba(255, 215, 0, 0.12);
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    a:hover {
+      opacity: 0.85;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+    }
+
+    /* Navigation */
+    header {
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(7, 9, 12, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .brand-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(255, 215, 0, 0.1);
+      color: var(--accent-gold);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      font-family: var(--font-sans);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #fff089 0%, #ffd700 60%, #b8860b 100%);
+      color: #000000;
+      box-shadow: 0 4px 14px rgba(255, 215, 0, 0.25);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.35);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-accent);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--accent-gold);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 50px;
+      text-align: center;
+      position: relative;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-gold);
+      background: rgba(255, 215, 0, 0.08);
+      border: 1px solid rgba(255, 215, 0, 0.25);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-gold-light), var(--accent-gold));
+      box-shadow: 0 0 8px var(--accent-gold);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      max-width: 940px;
+      margin: 0 auto 20px;
+      background: linear-gradient(180deg, #ffffff 40%, #fff089 70%, #ffd700 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 800px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Metric Strip */
+    .metric-strip {
+      margin: 40px auto 60px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 24px 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .metric-item {
+      text-align: left;
+      border-left: 2px solid var(--accent-gold-dark);
+      padding-left: 16px;
+    }
+    .metric-val {
+      font-size: 1.7rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: #fff;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .metric-val.green { color: var(--accent-gold); }
+    .metric-val.gold { color: var(--accent-gold); }
+    .metric-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Pillars */
+    .section-title-wrap {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .section-sub {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .section-heading {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+    .pillar-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 32px 28px;
+      transition: all 0.25s ease;
+    }
+    .pillar-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+    .pillar-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+    .pillar-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+    .pillar-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .relief-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 0.88rem;
+    }
+    .relief-bullets li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+    }
+    .relief-bullets li::before {
+      content: "✓";
+      color: var(--accent-gold);
+      font-weight: 800;
+    }
+
+    /* Telemetry Bar */
+    .telemetry-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px 28px;
+      margin-bottom: 80px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .telemetry-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255, 215, 0, 0.12);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      color: var(--accent-gold);
+      font-weight: 600;
+    }
+    .telemetry-metrics {
+      display: flex;
+      gap: 28px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+    .telemetry-metrics span {
+      color: var(--text-dim);
+    }
+    .telemetry-metrics strong {
+      color: #fff;
+      margin-left: 6px;
+    }
+
+    /* Pricing */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+    .price-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .price-card.featured {
+      border-color: var(--accent-gold);
+      box-shadow: var(--shadow-glow);
+    }
+    .featured-tag {
+      position: absolute;
+      top: -12px;
+      right: 24px;
+      background: linear-gradient(135deg, var(--accent-gold-light), var(--accent-gold));
+      color: #000000;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .plan-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .plan-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      min-height: 40px;
+    }
+    .plan-price {
+      font-size: 2.3rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .plan-price span {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--text-dim);
+    }
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      flex-grow: 1;
+    }
+    .plan-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .plan-features li::before {
+      content: "✓";
+      color: var(--accent-gold);
+      font-weight: 700;
+    }
+
+    /* Modal Form */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 12, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-accent);
+      border-radius: 16px;
+      max-width: 500px;
+      width: 100%;
+      padding: 36px;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .form-input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .form-input:focus {
+      border-color: var(--accent-gold);
+    }
+
+    footer {
+      margin-top: auto;
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 0;
+      background: var(--bg-dark);
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header>
+    <div class="container nav-inner">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-gold);"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        <span>NOMADIK SENTINEL</span>
+        <span class="brand-badge">Autonomous SecOps</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#outcomes">Business Relief</a>
+        <a href="#telemetry">Telemetry</a>
+        <a href="#pricing">Pricing</a>
+        <a href="/docs">Swagger API</a>
+        <button class="btn btn-outline" onclick="openAuditModal()">Client Portal</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero container">
+      <div class="hero-tag">
+        <span class="pulse-dot"></span>
+        Zero Source Code Retention (ZSCR) Architecture Active
+      </div>
+      <h1>Enterprise-Grade Security Operations Without the Enterprise Overhead.</h1>
+      <p>Pass security reviews, lock down edge endpoints, and qualify threat alerts in under 30 seconds—delivered autonomously without recruiting a dedicated SOC team.</p>
+      
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="openAuditModal()">
+          Request Free Perimeter Risk Audit
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+        <a href="#telemetry" class="btn btn-outline">Inspect Operational Telemetry</a>
+      </div>
+
+      <!-- 10-Second Executive Metric Strip -->
+      <div class="metric-strip">
+        <div class="metric-item">
+          <span class="metric-val green">$0 Headcount</span>
+          <span class="metric-label">Eliminates the $160K/yr overhead of hiring, training, and retaining an in-house SOC analyst.</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-val gold">&lt; 30 Seconds</span>
+          <span class="metric-label">Autonomous triage engine analyzes raw telemetry and isolates true vulnerabilities from noise.</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-val">Zero Downtime</span>
+          <span class="metric-label">Edge-isolated proxy and WAF mitigates attacks before malicious packets touch production services.</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-val green">100% Audit-Ready</span>
+          <span class="metric-label">Continuous evidence harvesting for vendor assessments and cyber insurance renewals.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Operational Telemetry Bar -->
+    <section class="container" id="telemetry">
+      <div class="telemetry-bar">
+        <div class="telemetry-status">
+          <span>Backend Gateway:</span>
+          <span class="status-badge" id="api-status">
+            <span class="pulse-dot"></span>
+            <span id="api-text">CONNECTING</span>
+          </span>
+        </div>
+        <div class="telemetry-metrics">
+          <div><span>Triage SLA:</span> <strong>&lt; 30s</strong></div>
+          <div><span>Host Clusters:</span> <strong>ACTIVE</strong></div>
+          <div><span>Source Retention:</span> <strong>0% (RAM-ONLY)</strong></div>
+        </div>
+        <div>
+          <a href="/docs" style="font-family: var(--font-mono); font-size: 0.85rem;">Inspect API Docs &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Business Relief Pillars -->
+    <section class="container" id="outcomes">
+      <div class="section-title-wrap">
+        <span class="section-sub">Outcome-Driven Architecture</span>
+        <h2 class="section-heading">How Nomadik Sentinel Protects Revenue</h2>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">01</div>
+          <h3>Continuous Compliance &amp; Audit Readiness</h3>
+          <p>Pass enterprise vendor security assessments without weeks of manual spreadsheet scrambling and emergency remediation sprints.</p>
+          <ul class="relief-bullets">
+            <li>Immediate compliance evidence generation</li>
+            <li>Meets cyber insurance underwriter criteria</li>
+            <li>Automatic verification of SSL, headers, and DNS hygiene</li>
+          </ul>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">02</div>
+          <h3>Zero-Downtime Perimeter Defense</h3>
+          <p>Shield your revenue-generating customer portals and API endpoints against malicious scrapers, credential stuffing, and volumetric floods.</p>
+          <ul class="relief-bullets">
+            <li>Edge-proxied traffic sanitization</li>
+            <li>Encrypted tunnel routing with zero exposed ports</li>
+            <li>Real-time automated IP and ASN reputation scoring</li>
+          </ul>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">03</div>
+          <h3>Autonomous Rapid Threat Triage</h3>
+          <p>Stop paying senior engineers to investigate routine false alarms. Telemetry is parsed, correlated, and prioritized automatically.</p>
+          <ul class="relief-bullets">
+            <li>Multi-factor Chokepoint prioritization</li>
+            <li>Zero customer code retention during analysis</li>
+            <li>Deterministic patch guidance dispatched instantly</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Tiers -->
+    <section class="container" id="pricing">
+      <div class="section-title-wrap">
+        <span class="section-sub">Predictable Subscription Tiers</span>
+        <h2 class="section-heading">Transparent Defense Packages</h2>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Core -->
+        <div class="price-card">
+          <div class="plan-name">Sentinel Core</div>
+          <div class="plan-desc">Continuous perimeter visibility and audit reporting for emerging web services.</div>
+          <div class="plan-price">$49 <span>/month</span></div>
+          <ul class="plan-features">
+            <li>Continuous perimeter port &amp; header scanning</li>
+            <li>Automated daily compliance health digest</li>
+            <li>Up to 2 production domains monitored</li>
+            <li>Email threshold alerting</li>
+          </ul>
+          <button class="btn btn-outline" onclick="openAuditModal('Sentinel Core')">Deploy Core</button>
+        </div>
+
+        <!-- Pro -->
+        <div class="price-card featured">
+          <div class="featured-tag">Recommended</div>
+          <div class="plan-name">Sentinel Pro</div>
+          <div class="plan-desc">Autonomous edge defense, sub-minute triage, and patch recommendations.</div>
+          <div class="plan-price">$199 <span>/month</span></div>
+          <ul class="plan-features">
+            <li>Everything in Core, plus:</li>
+            <li>Sub-30s autonomous alert triage</li>
+            <li>Zero-trust Cloudflare tunnel perimeter routing</li>
+            <li>Deterministic remediation guidance</li>
+            <li>Up to 5 production domains &amp; API gateways</li>
+          </ul>
+          <button class="btn btn-primary" onclick="openAuditModal('Sentinel Pro')">Deploy Pro</button>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="price-card">
+          <div class="plan-name">Sentinel Enterprise</div>
+          <div class="plan-desc">Dedicated active-defense cluster and custom compliance SLA.</div>
+          <div class="plan-price">$499 <span>/month</span></div>
+          <ul class="plan-features">
+            <li>Dedicated isolated triage container</li>
+            <li>Custom SIEM rules and decoders</li>
+            <li>SOC2 / ISO 27001 evidence audit pack</li>
+            <li>Priority 24/7 escalation hotline</li>
+          </ul>
+          <button class="btn btn-outline" onclick="openAuditModal('Sentinel Enterprise')">Deploy Enterprise</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Audit Modal -->
+  <div class="modal" id="audit-modal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeAuditModal()">&times;</button>
+      <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 8px;">Run Perimeter Risk Audit</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Enter your primary domain to generate an immediate perimeter risk assessment.</p>
+      
+      <form id="audit-form" onsubmit="handleAuditSubmit(event)">
+        <div class="form-group">
+          <label for="audit-domain">Target Domain / Hostname</label>
+          <input type="text" id="audit-domain" class="form-input" placeholder="api.yourcompany.com" required />
+        </div>
+        <div class="form-group">
+          <label for="audit-email">Work Email (for Audit Report)</label>
+          <input type="email" id="audit-email" class="form-input" placeholder="security@yourcompany.com" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">Start Assessment</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <div>&copy; 2026 Nomadik Security Operations. All rights reserved.</div>
+      <div style="display: flex; gap: 20px;">
+        <span>Zero Source Code Retention (ZSCR) Guaranteed</span>
+        <a href="/docs">Swagger Documentation</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Live Backend API Check
+    fetch('/health')
+      .then(response => {
+        if (!response.ok) throw new Error('Unhealthy');
+        return response.json();
+      })
+      .then(() => {
+        const badge = document.getElementById('api-status');
+        const text = document.getElementById('api-text');
+        text.textContent = 'ONLINE';
+        badge.style.background = 'rgba(255, 215, 0, 0.15)';
+        badge.style.color = '#ffd700';
+      })
+      .catch(() => {
+        const badge = document.getElementById('api-status');
+        const text = document.getElementById('api-text');
+        text.textContent = 'STANDALONE EDGE';
+        badge.style.background = 'rgba(255, 215, 0, 0.12)';
+        badge.style.color = '#ffd700';
+      });
+
+    // Modal Control
+    function openAuditModal(plan) {
+      document.getElementById('audit-modal').classList.add('active');
+    }
+    function closeAuditModal() {
+      document.getElementById('audit-modal').classList.remove('active');
+    }
+    function handleAuditSubmit(e) {
+      e.preventDefault();
+      const domain = document.getElementById('audit-domain').value;
+      const email = document.getElementById('audit-email').value;
+      
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      submitBtn.textContent = 'Queuing Audit...';
+      submitBtn.disabled = true;
+
+      fetch('/api/v1/scan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ target: domain, email: email })
+      }).finally(() => {
+        alert('Audit queued for ' + domain + '. Report will be dispatched to ' + email + '.');
+        closeAuditModal();
+        submitBtn.textContent = 'Start Assessment';
+        submitBtn.disabled = false;
+      });
+    }
+  </script>
+</body>
+</html>
