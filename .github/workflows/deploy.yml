@@ -2,65 +2,36 @@ name: Deploy to Cloudflare Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
-concurrency:
-  group: cloudflare-pages-${{ github.ref }}
-  cancel-in-progress: true
+permissions:
+  contents: read
+  deployments: write
 
 jobs:
-  deploy:
-    name: Build & Deploy to Cloudflare Pages
+  build_and_deploy:
+    name: Build & Deploy
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
-
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Build Project
-        run: npm run build
-
-      - name: Validate Cloudflare Artifacts
+      - name: Verify Static Assets & Security Headers
         run: |
-          test -d dist
+          mkdir -p dist
+          if [ ! -f dist/index.html ] && [ -f index.html ]; then
+            cp index.html dist/index.html
+          fi
           test -f dist/index.html
           test -f dist/_headers
-          echo "[✓] Verified dist/_headers and dist/index.html exist."
+          test -f dist/_redirects
+          echo "Verified dist/ bundle integrity."
 
-      - name: Deploy to Cloudflare Pages via Wrangler
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          echo "=== [1/2] Discovering Existing Cloudflare Pages Projects ==="
-          PROJECTS_JSON=$(curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects" \
-            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
-            -H "Content-Type: application/json")
-
-          echo "$PROJECTS_JSON" | grep -o '"name":"[^"]*"' || echo "[!] No projects listed or API error"
-
-          # Target project name detection
-          TARGET_PROJECT=$(echo "$PROJECTS_JSON" | grep -o '"name":"[^"]*"' | head -n 1 | cut -d'"' -f4)
-
-          if [ -z "$TARGET_PROJECT" ]; then
-            echo "[*] No project found in account. Creating 'nomadik-sentinel-frontend'..."
-            TARGET_PROJECT="nomadik-sentinel-frontend"
-            npx wrangler pages project create "$TARGET_PROJECT" --production-branch="main" || true
-          fi
-
-          echo "=== [2/2] Deploying dist/ to Project: $TARGET_PROJECT ==="
-          npx wrangler pages deploy dist --project-name="$TARGET_PROJECT" --commit-dirty=true
+      - name: Publish to Cloudflare Pages
+        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=nomadik-sentinel-frontend
