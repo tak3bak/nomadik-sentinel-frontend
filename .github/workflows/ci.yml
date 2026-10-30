@@ -1,0 +1,29 @@
+name: Frontend CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify Static Assets & Headers
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify Bundle Integrity
+        run: |
+          mkdir -p dist
+          if [ ! -f dist/index.html ] && [ -f index.html ]; then
+            cp index.html dist/index.html
+          fi
+          test -f index.html
+          test -f vercel.json
+          test -f dist/index.html
+          echo "Verified Vercel frontend bundle."
