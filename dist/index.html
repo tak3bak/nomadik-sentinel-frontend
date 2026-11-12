@@ -603,51 +603,82 @@
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="pricing">
-        <div class="section-header">
-            <h2>Commercial Onboarding</h2>
-            <h3>Select Your Deployment Tier</h3>
-        </div>
-
-        <div class="grid-2">
-            <!-- Tier 1 -->
-            <div class="pricing-card">
-                <div>
-                    <div class="pricing-header">
-                        <h4>Security Sentinel</h4>
-                        <span class="tier-badge">Standard</span>
-                    </div>
-                    <p style="color: #9ca3af; font-size: 0.875rem; margin-bottom: 24px;">Continuous active defense, vulnerability assessment, and Wazuh log aggregation for modern tech stacks.</p>
-                    <div class="price">$499<span> / month</span></div>
-                    <ul class="features-list">
-                        <li><span class="check">&#10003;</span> Real-Time SIEM Event Monitoring</li>
-                        <li><span class="check">&#10003;</span> Automated Threat Mitigation</li>
-                        <li><span class="check">&#10003;</span> Cloudflare Edge WAF Integration</li>
-                    </ul>
-                </div>
-                <a href="https://buy.stripe.com/your_sentinel_link_here" class="btn-tier-outline">Initialize Sentinel Tier</a>
-            </div>
-
-            <!-- Tier 2 -->
-            <div class="pricing-card featured">
-                <div class="featured-tag">Recommended</div>
-                <div>
-                    <div class="pricing-header">
-                        <h4>Enterprise Systems</h4>
-                        <span class="tier-badge">Full Stack</span>
-                    </div>
-                    <p style="color: #9ca3af; font-size: 0.875rem; margin-bottom: 24px;">Complete custom systems engineering, high-performance API gateways, compliance mapping, and dedicated architecture support.</p>
-                    <div class="price">$1,499<span> / month</span></div>
-                    <ul class="features-list">
-                        <li><span class="check">&#10003;</span> Custom FastAPI &amp; Docker Architectures</li>
-                        <li><span class="check">&#10003;</span> SOC 2 &amp; HIPAA Compliance Auditing</li>
-                        <li><span class="check">&#10003;</span> 24/7 Priority Security Engineering</li>
-                    </ul>
-                </div>
-                <a href="https://buy.stripe.com/your_enterprise_link_here" class="btn-tier-solid">Deploy Enterprise Tier</a>
-            </div>
-        </div>
-    </section>
+    <section id="pricing" class="pricing-section">
+  <h2>Commercial Onboarding — Select Your Deployment Tier</h2>
+  <div class="pricing-grid">
+  <div class="tier-card">
+    
+    <h3>Sentinel Core</h3>
+    <p class="subtitle">Baseline Active Defense</p>
+    <div class="price">$99 <span>/ month</span></div>
+    <ul>
+      <li>&#10003; Containerized Wazuh SIEM</li>
+      <li>&#10003; Docker Compose Automation</li>
+      <li>&#10003; File Integrity & Rootkit Detection</li>
+      <li>&#10003; Up to 15 Monitored Endpoints</li>
+    </ul>
+    <a href="https://buy.stripe.com/9B6fZg5jM84j44seDdd7q0b" class="cta-btn">Deploy Core</a>
+  </div>
+  <div class="tier-card">
+    
+    <h3>Sentinel Compliance</h3>
+    <p class="subtitle">Compliance & Edge Defense</p>
+    <div class="price">$299 <span>/ month</span></div>
+    <ul>
+      <li>&#10003; Everything in Sentinel Core</li>
+      <li>&#10003; SOC 2, HIPAA & CMMC 2.0 Mapping</li>
+      <li>&#10003; FastAPI Gateway & Caddy TLS</li>
+      <li>&#10003; Cloudflare Edge WAF Integration</li>
+    </ul>
+    <a href="https://buy.stripe.com/00wcN4fYq2JZfNacv5d7q0c" class="cta-btn">Initialize Compliance</a>
+  </div>
+  <div class="tier-card recommended">
+    <span class="badge">Recommended</span>
+    <h3>Sentinel Active Defense</h3>
+    <p class="subtitle">Autonomous Threat Mitigation</p>
+    <div class="price">$499 <span>/ month</span></div>
+    <ul>
+      <li>&#10003; Everything in Compliance</li>
+      <li>&#10003; Chokepoint Finder Prioritization</li>
+      <li>&#10003; Sentinel Growth Agent API Access</li>
+      <li>&#10003; Real-Time Automated Containment</li>
+    </ul>
+    <a href="https://buy.stripe.com/aFa00i7rU84jfNaamXd7q0d" class="cta-btn">Deploy Active Defense</a>
+  </div>
+  <div class="tier-card">
+    
+    <h3>Sentinel Enterprise</h3>
+    <p class="subtitle">Full-Cluster & AI Operations</p>
+    <div class="price">$1,299 <span>/ month</span></div>
+    <ul>
+      <li>&#10003; Multi-Node HA Wazuh Cluster</li>
+      <li>&#10003; Local Ollama & MCP Connectors</li>
+      <li>&#10003; CodeMender CI/CD Remediation</li>
+      <li>&#10003; 24/7 Priority Security Engineering</li>
+    </ul>
+    <a href="https://buy.stripe.com/14A4gy7rU3O3bwUbr1d7q0e" class="cta-btn">Deploy Enterprise</a>
+  </div>
+  </div>
+  <div class="emergency-banner">
+    <div>
+      <strong>Need Immediate Containment?</strong>
+      <span>4-Hour Rapid Emergency Response &amp; Remediation — $1,499 one-time dispatch.</span>
+    </div>
+    <a href="https://buy.stripe.com/6oU00ibIa3O3bwUdz9d7q0f" class="cta-btn">Dispatch Emergency Team</a>
+  </div>
+</section>
+<style>
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .tier-card { border: 1px solid #27272a; border-radius: 12px; padding: 1.75rem; background: #09090b; color: #f4f4f5; display: flex; flex-direction: column; }
+  .tier-card.recommended { border-color: #d4af37; box-shadow: 0 0 24px rgba(212,175,55,0.15); }
+  .badge { align-self: flex-start; background: #d4af37; color: #09090b; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 999px; margin-bottom: 0.75rem; }
+  .price { font-size: 2rem; font-weight: 700; margin: 1rem 0; }
+  .price span { font-size: 0.9rem; color: #a1a1aa; font-weight: 400; }
+  .tier-card ul { list-style: none; padding: 0; margin: 0 0 1.5rem 0; flex-grow: 1; }
+  .tier-card li { margin-bottom: 0.5rem; color: #d4d4d8; }
+  .cta-btn { display: inline-block; text-align: center; padding: 0.75rem 1rem; border-radius: 8px; background: #f4f4f5; color: #09090b; font-weight: 600; text-decoration: none; }
+  .emergency-banner { margin-top: 2rem; padding: 1.5rem; border: 1px solid #3f3f46; border-radius: 12px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; background: #18181b; color: #f4f4f5; }
+</style>
 
     <!-- Footer -->
     <footer>
