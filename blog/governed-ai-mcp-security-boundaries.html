@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Governed AI Without Enterprise Bloat: Securing MCP Boundaries | Nomadik Security Operations</title>
+  <meta name="description" content="Why Model Context Protocol (MCP) proves AI needs strict context and guardrails—and how Nomadik Security Sentinel delivers evidence-backed triage without enterprise bloat." />
+  <link rel="canonical" href="https://nomadik.site/blog/governed-ai-mcp-security-boundaries.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Governed AI Without Enterprise Bloat: Securing MCP Boundaries & Perimeter Posture" />
+  <meta property="og:description" content="How lean engineering teams lock down MCP discovery surfaces, CORS policies, and SIEM triage with Nomadik Security Sentinel." />
+  <meta property="og:url" content="https://nomadik.site/blog/governed-ai-mcp-security-boundaries.html" />
+  <meta property="og:site_name" content="Nomadik Security Operations" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Governed AI Without Enterprise Bloat: Securing MCP Boundaries and Perimeter Posture for Lean Teams",
+    "datePublished": "2026-11-25",
+    "author": {
+      "@type": "Person",
+      "name": "Kalen Vandenbos"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Nomadik Security Operations",
+      "url": "https://nomadik.site"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --surface: #111827;
+      --surface-alt: #162033;
+      --border: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #38bdf8;
+      --accent-strong: #0ea5e9;
+      --code-bg: #090d14;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header.topbar {
+      border-bottom: 1px solid var(--border);
+      background: rgba(11, 15, 23, 0.92);
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    .topbar-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      color: #ffffff;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+    }
+
+    .nav-link:hover {
+      color: #ffffff;
+    }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #061018;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.875rem;
+      padding: 0.5rem 0.95rem;
+      border-radius: 6px;
+      transition: background 0.15s ease;
+    }
+
+    .nav-cta:hover {
+      background: #7dd3fc;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.75rem 1.25rem 4.5rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(1.85rem, 3.6vw, 2.55rem);
+      line-height: 1.22;
+      margin: 0 0 1rem;
+      color: #ffffff;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 2.25rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      color: #ffffff;
+      margin: 2.5rem 0 0.85rem;
+      line-height: 1.3;
+    }
+
+    h3 {
+      font-size: 1.12rem;
+      color: var(--accent);
+      margin: 1.65rem 0 0.5rem;
+    }
+
+    p {
+      margin: 0 0 1.15rem;
+    }
+
+    ul, ol {
+      margin: 0 0 1.35rem;
+      padding-left: 1.35rem;
+    }
+
+    li {
+      margin-bottom: 0.65rem;
+    }
+
+    strong {
+      color: #ffffff;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88em;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      color: #7dd3fc;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+    }
+
+    .callout {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      border-radius: 0 8px 8px 0;
+      padding: 1.15rem 1.35rem;
+      margin: 1.75rem 0;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1.75rem 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: var(--surface-alt);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cta-box {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: linear-gradient(145deg, var(--surface) 0%, var(--surface-alt) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 12px;
+    }
+
+    .cta-box h2 {
+      margin-top: 0;
+    }
+
+    .cta-button {
+      display: inline-block;
+      margin-top: 0.75rem;
+      background: var(--accent);
+      color: #061018;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 0.75rem 1.35rem;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+
+    .cta-button:hover {
+      background: #7dd3fc;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.25rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="https://nomadik.site">Nomadik <span>Security Operations</span></a>
+      <div class="nav-links">
+        <a class="nav-link" href="/blog/">Briefings</a>
+        <a class="nav-cta" href="https://nomadik.site">View Security Tiers</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <span class="eyebrow">Architecture &amp; AI Governance</span>
+      <h1>Governed AI Without Enterprise Bloat: Securing MCP Boundaries and Perimeter Posture for Lean Teams</h1>
+      <div class="meta">
+        By <strong>Kalen Vandenbos</strong>, Founder &amp; Lead Architect &bull; November 25, 2026
+      </div>
+
+      <p>
+        Enterprise endpoint vendors made one point unmistakably clear in late 2026 with the wave of Model Context Protocol (MCP) integrations: <strong>ungrounded AI is an operational liability.</strong>
+      </p>
+      <p>
+        When large language models are wired directly into IT and security workflows without an authoritative system of record, scoped permissions, or human-in-the-loop verification, they hallucinate remediation steps, over-reach across APIs, and expand the exact attack surface they were deployed to defend.
+      </p>
+      <p>
+        While enterprise announcements focus on 10,000-endpoint estates and multi-layer licensing, small and mid-market engineering teams face the exact same architectural risk today—often without a dedicated 24/7 SOC.
+      </p>
+
+      <div class="callout">
+        <strong>Core Principle:</strong> AI recommendations are only as trustworthy as the telemetry grounding them and the permission boundaries constraining them.
+      </div>
+
+      <h2>Why MCP Changes the External &amp; Internal Attack Surface</h2>
+      <p>
+        Model Context Protocol standardizes how AI clients—such as GitHub Copilot, Microsoft Copilot, Claude, and custom autonomous agents—discover tools and query operational state. Standardization removes integration friction, but it introduces three immediate security failure modes when deployed without strict guardrails:
+      </p>
+      <ol>
+        <li>
+          <strong>Unauthenticated Discovery &amp; Endpoint Exposure:</strong> Developers routinely stand up <code>/mcp</code>, <code>/sse</code>, <code>/v1/models</code>, or <code>/.well-known/mcp/server-card.json</code> manifests alongside public OpenAPI specs (<code>/openapi.json</code>) during rapid prototyping. Left reachable on internet-facing hosts or subdomains, those endpoints leak internal tool schemas, model inventories, and unauthenticated JSON-RPC <code>initialize</code> surfaces.
+        </li>
+        <li>
+          <strong>Permissive Cross-Origin (CORS) Trust:</strong> When API gateways reflect arbitrary <code>Origin</code> headers or combine wildcard <code>Access-Control-Allow-Origin: *</code> rules with credentialed routes, untrusted web origins can probe developer-reachable AI connectors.
+        </li>
+        <li>
+          <strong>Ungoverned Action Execution:</strong> Connecting an AI agent to shell execution, endpoint isolation, or DNS/firewall controls without deterministic policy gates turns prompt injection or noisy telemetry into automated outages.
+        </li>
+      </ol>
+
+      <h2>Four Hard Boundaries Every AI-Enabled Stack Needs</h2>
+
+      <h3>1. Perimeter &amp; Discovery Hygiene First</h3>
+      <p>
+        Before connecting internal tools to AI agents, lock down your external attack surface:
+      </p>
+      <ul>
+        <li>Enforce strict <strong>DMARC (<code>p=reject</code>)</strong>, <strong>SPF</strong>, <strong>HSTS</strong>, and <strong>Content-Security-Policy (CSP)</strong> headers so external domains cannot be spoofed in vendor or internal impersonation campaigns.</li>
+        <li>Block unauthenticated public access to <code>/openapi.json</code>, <code>/docs</code>, <code>/v1/models</code>, and <code>/.well-known/mcp*</code> manifests unless explicitly intended for public consumption.</li>
+        <li>Replace wildcard or origin-reflecting CORS policies with explicit allowlists.</li>
+      </ul>
+
+      <h3>2. Authoritative Telemetry Over Model Guesswork</h3>
+      <p>
+        AI triage should never invent context. At <strong>Nomadik Security Operations</strong>, <strong>Nomadik Security Sentinel</strong> anchors every investigation in verified operational telemetry:
+      </p>
+      <ul>
+        <li><strong>Wazuh SIEM</strong> agents collect host, network, and compliance telemetry mapped against SOC 2, HIPAA, and CMMC 2.0 rules.</li>
+        <li><strong>FastAPI</strong> microservices normalize alerts and external reconnaissance findings into structured records in <strong>PostgreSQL</strong> before any model evaluates an event.</li>
+      </ul>
+
+      <h3>3. Local-First Inference for Sensitive Context</h3>
+      <p>
+        Routing raw endpoint telemetry, internal hostnames, or vulnerability findings through external third-party LLM APIs creates unnecessary data-governance risk. Running quantized local models via <strong>Ollama</strong> (such as <code>qwen2.5-coder-triage:7b</code>) keeps alert enrichment and log summarization inside your own infrastructure boundary—with zero external token leakage.
+      </p>
+
+      <h3>4. Scoped Active Response with Human Sign-Off</h3>
+      <p>
+        Autonomous defense works only when blast radius is bounded. Active-response containment scripts must operate behind strict RBAC, deterministic rule thresholds, full audit logs, and explicit human approval for high-impact state changes.
+      </p>
+
+      <h2>How Nomadik Security Sentinel Operationalizes Governed Defense</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th>Heavy Enterprise Suites</th>
+              <th>Nomadik Security Sentinel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Telemetry &amp; Compliance</strong></td>
+              <td>Proprietary agents &amp; complex licensing</td>
+              <td>Containerized <strong>Wazuh SIEM</strong> + SOC 2 / HIPAA / CMMC 2.0 rules</td>
+            </tr>
+            <tr>
+              <td><strong>AI Triage &amp; Privacy</strong></td>
+              <td>Cloud-routed telemetry to external AI vendors</td>
+              <td>Local-first <strong>Ollama</strong> triage (<code>qwen2.5-coder-triage:7b</code>) + FastAPI core</td>
+            </tr>
+            <tr>
+              <td><strong>Perimeter &amp; AI Exposure</strong></td>
+              <td>Heavy internal endpoint focus</td>
+              <td>Continuous external audit (DMARC, SPF, HSTS, CSP, OpenAPI, MCP &amp; CORS)</td>
+            </tr>
+            <tr>
+              <td><strong>Deployment Footprint</strong></td>
+              <td>Multi-month enterprise rollout</td>
+              <td>Containerized Docker stack + rapid onboarding</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <section class="cta-box">
+        <h2>Audit Your Perimeter and AI Exposure Today</h2>
+        <p>
+          Whether you are rolling out Copilot across engineering or deploying internal MCP servers, your external domain and API posture is the first line of defense.
+        </p>
+        <ul>
+          <li><strong>Automated Posture Audit:</strong> Identify exposed DNS/email records, open API/MCP manifests, and permissive CORS policies before attackers do.</li>
+          <li><strong>Governed Continuous Monitoring:</strong> Activate Wazuh SIEM telemetry, local-first triage, and active defense tailored to your stack.</li>
+        </ul>
+        <a class="cta-button" href="https://nomadik.site">Explore Coverage Tiers at nomadik.site &rarr;</a>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    &copy; 2026 Nomadik Security Operations &bull; <a href="https://nomadik.site" style="color: var(--accent); text-decoration: none;">nomadik.site</a>
+  </footer>
+</body>
+</html>
