@@ -24,6 +24,5 @@ jobs:
             cp index.html dist/index.html
           fi
           test -f index.html
-          test -f vercel.json
-          test -f dist/index.html
-          echo "Verified Vercel frontend bundle."
+                    test -f dist/index.html
+          echo "Verified Cloudflare Pages frontend bundle."
